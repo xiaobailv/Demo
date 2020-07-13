@@ -1,0 +1,52 @@
+# 服务器相关
+server:
+  port: 9090
+  servlet:
+    #context-path: /jsp
+    jsp:
+      init-parameters:
+        development: true
+# 视图解析器
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+# 数据源
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 123
+    schema: classpath:/org/springframework/batch/core/schema-mysql.sql  # 指定需要创建的batch任务表
+  batch:
+    initialize-schema: always
+    job:
+      # names: parentJob
+      enabled: false
+mybatis:
+  type-aliases-package: com.liushihao.entity
+  mapper-locations: classpath:com/liushihao/mapper/*Mapper.xml
+
+# 日志
+logging:
+  # 日志等级
+  level:
+    root: error
+    com.liushihao.dao: debug
+    com.liushihao.service: debug
+    com.liushihao.controller: debug
+    com.liushihao.batch.config: debug
+    com.liushihao.batch.reader: debug
+    com.liushihao.batch.processor: debug
+    com.liushihao.batch.writer: debug
+    #  file:
+    # 输出的日志名称
+    #    name: serverlog.txt
+    # 输出的日志目录
+  #    path: ../
+    #  pattern:
+    # 控制台的日志输出格式
+    #    console: %d{yyyy-MM-dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n
+#    file: %d{yyyy-MM-dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n
