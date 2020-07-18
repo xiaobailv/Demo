@@ -12,10 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 public class FileIOTest {
@@ -258,5 +255,46 @@ public class FileIOTest {
     public void createDirectory() {
         String filePath = "D:\\Download\\aaa\\123.txt";
         WriteUtil.write(filePath, "111111111\n", false);
+    }
+
+    @Test
+    public void replace() {
+        // 20200710|20200615|100099|14|0|0|611001|14|1543463|882012|6217661599001060644|6217661599001060644|000|882012|156|10.00|||||12340008|008009|123026|||||
+        // 20200710|20200615|100099|14|0|0|611002|14|1543470|882012|6217661599001060644|6217661599001060644|000|882012|156|10.00|||||12340008|008010|123215|||||
+        String str = "20200710|20200615|100099|14|0|0|611001|14|1543463|882012|6217661599001060644|6217661599001060644|000|882012|156|10.00|||||12340008|008009|123026|||||\n";
+        Integer integer1 = 611001;
+        Integer integer2 = 1543463;
+        Integer integer3 = 108009;
+        Integer integer4 = 123026;
+        List<String> list = new ArrayList<>();
+        Random r = new Random();
+        StringBuilder rs = new StringBuilder();
+        for (int i = 0; i < 11000; i++) {
+            Integer integer1add = integer1++;
+            Integer integer2add = integer2++;
+            Integer integer3add = integer3++;
+            Integer integer4add = integer4++;
+            String replace = str.replace("611001", integer1add.toString());
+            String replace1 = replace.replace("1543463", integer2add.toString());
+            String replace2 = replace1.replace("008009", integer3add.toString());
+            String replace3 = replace2.replace("123026", integer4add.toString());
+            list.add(replace3);
+        }
+        ArrayList<List<String>> lists = new ArrayList<>();
+        lists.add(list);
+        WriteUtil.writeList(lists, "/home/gbatch/recon/file/20200712/A00093/OFFLINE/aaa.txt");
+    }
+
+    @Test
+    public void randomStr() {
+        String source = "0123456789";
+        Random r = new Random();
+        StringBuilder rs = new StringBuilder();
+        for (int j = 0; j < 6; j++) {
+            int i = r.nextInt(10);
+            rs.append(source.charAt(i));
+            System.out.println(i);
+        }
+        System.out.println("rs = " + rs);
     }
 }

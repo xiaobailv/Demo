@@ -1,5 +1,6 @@
 package com.liushihao.junit;
 
+import com.liushihao.util.TLVData;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -28,5 +29,17 @@ public class NumberTest {
         System.out.println("multiply = " + multiply);
         int i = multiply.intValue();
         System.out.println("i = " + i);
+    }
+
+    @Test
+    public void integerParse() {
+        String str = "9F26087BC11937E0B9604A9F2701409F101307011703900000010A01000000000054B7A69F9F3704486904DD9F360200A7950500000000009A032004039C01009F02060000000016005F2A02015682027C009F1A0201569F03060000000000009F3303E0E1C89F1E0831333731353338308408A0000003330101029F090200209F4104000040619F34033F00009F3501229F74064543433030318A025931  ";//"9F26087BC11937E0B9604A9F2701409F101307011703900000010A01000000000054B7A69F9F3704486904DD9F360200A7950500000000009A032004039C01009F02060000000016005F2A02015682027C009F1A0201569F03060000000000009F3303E0E1C89F1E0831333731353338308408A0000003330101029F090200209F4104000040619F34033F00009F3501229F74064543433030318A025931                                                                                                                                                                                                  88202100774450000018               成吉思汗                                                    0";
+        TLVData.getTagValue(str, "9F33");
+        String firstByte = str.substring(0, 2);
+        int i = Integer.parseInt(firstByte, 16);
+        if ((i & 0x1f) == 0x1f) {
+            str.substring(0, 4);
+
+        }
     }
 }
