@@ -19,8 +19,6 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class FtpUtil {
 
-
-
     /**
      * 获取FTPClient对象
      *
@@ -140,12 +138,12 @@ public class FtpUtil {
                     if (!downPathFile.exists()) {
                         downPathFile.mkdirs();
                         downFile.createNewFile();
-                    }else {
-                        if (downFile.exists()){
+                    } else {
+                        if (downFile.exists()) {
                             downFile.delete();
                             downFile.createNewFile();
 
-                        }else {
+                        } else {
                             downFile.createNewFile();
                         }
                     }
@@ -175,9 +173,9 @@ public class FtpUtil {
     /**
      * FTP文件上传工具类
      *
-     * @param ftp       ftp信息
-     * @param filePath  本地文件的路径+文件名
-     * @param ftpPath   ftp的路径
+     * @param ftp      ftp信息
+     * @param filePath 本地文件的路径+文件名
+     * @param ftpPath  ftp的路径
      * @return
      */
     public static boolean uploadFile(FTPClient ftp, String filePath, String ftpPath) {
@@ -377,9 +375,9 @@ public class FtpUtil {
                         break;
                     }
                 }
-                if (!result){
+                if (!result) {
 
-                    log.info("-----未在ftp找到文件：{}/{}----",directory,fileName);
+                    log.info("-----未在ftp找到文件：{}/{}----", directory, fileName);
 
                 }
             }
@@ -469,7 +467,7 @@ public class FtpUtil {
             ftpClient = getFTPClient(ftpHost, ftpPort, ftpUserName, ftpPassword);
             ftpClient.changeWorkingDirectory(ftpPath);
 
-            String f_ame = new String(fileName.getBytes("GBK"), FTP.DEFAULT_CONTROL_ENCODING);	//编码文件格式,解决中文文件名
+            String f_ame = new String(fileName.getBytes("GBK"), FTP.DEFAULT_CONTROL_ENCODING);    //编码文件格式,解决中文文件名
 
             File localFile = new File(localPath + File.separatorChar + targetFileName);
             OutputStream os = new FileOutputStream(localFile);
