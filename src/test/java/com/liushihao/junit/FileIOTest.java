@@ -238,15 +238,15 @@ public class FileIOTest {
             for (List<String> strings : items) {
                 log.info("items.get(0).size() -> {}", items.get(0).size());
                 log.info("strings.get(0) -> {}", strings.get(0));
-                WriteUtil.write(fileName, strings.get(0), false);
+                WriteUtil.write(fileName, strings.get(0), false, StandardCharsets.UTF_8);
                 for (int i = 1; i < strings.size(); i++) {
                     log.info("strings.get(" + i + ") -> {}", strings.get(i));
                     log.info("items.get(0).size() -> {}", items.get(0).size());
-                    WriteUtil.write(fileName, strings.get(i), true);
+                    WriteUtil.write(fileName, strings.get(i), true, StandardCharsets.UTF_8);
                 }
             }
         } else {
-            WriteUtil.write(fileName, "", false);
+            WriteUtil.write(fileName, "", false, StandardCharsets.UTF_8);
             log.info("没有符合条件的数据...");
         }
     }
@@ -254,7 +254,7 @@ public class FileIOTest {
     @Test
     public void createDirectory() {
         String filePath = "D:\\Download\\aaa\\123.txt";
-        WriteUtil.write(filePath, "111111111\n", false);
+        WriteUtil.write(filePath, "111111111\n", false, StandardCharsets.UTF_8);
     }
 
     @Test
@@ -282,7 +282,7 @@ public class FileIOTest {
         }
         ArrayList<List<String>> lists = new ArrayList<>();
         lists.add(list);
-        WriteUtil.writeList(lists, "/home/gbatch/recon/file/20200712/A00093/OFFLINE/aaa.txt");
+        WriteUtil.writeList(lists, "/home/gbatch/recon/file/20200712/A00093/OFFLINE/aaa.txt", StandardCharsets.UTF_8);
     }
 
     @Test
