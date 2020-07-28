@@ -2,12 +2,14 @@ package com.liushihao.junit;
 
 import com.liushihao.entity.Log;
 import com.liushihao.entity.User;
+import com.liushihao.util.WriteUtil;
 import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 public class StringTest {
@@ -110,5 +112,71 @@ public class StringTest {
         String c = new String("12");
         System.out.println(c == b);         // fasle
         System.out.println(c.equals(b));    // true
+    }
+
+    @Test
+    public void readeFileGbk() throws IOException {
+        WriteUtil.write("D:/Download/aaa.txt", "测试刘世豪", false, Charset.forName("GBK"));
+        //设置reader需要的Resource
+        String filePath = "D:\\KL-Bank\\INFB-INFR\\INF20032801B";
+        filePath = "D:/Download/aaa.txt";
+        // 读文件
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "GBK"));
+        // 将读取到的字符串赋值给line
+        String line = br.readLine();
+        byte[] bytes = line.getBytes("GBK");
+        System.out.println(line + ": 长度" + line.length());
+        System.out.println(bytes + ": 长度" + bytes.length);
+        /*if (line != null) { // 如果读取到的不为null则说明文件有内容
+            System.out.println("读取到的success文件内容 -> {}" + line);
+            br.close();
+        }*/
+    }
+
+
+    private static String subStringByByte(String str, int len) {
+        String result = null;
+        if (str != null) {
+            byte[] a = str.getBytes();
+            if (a.length <= len) {
+                result = str;
+            } else if (len > 0) {
+                result = new String(a, 0, len);
+                int length = result.length();
+                if (str.charAt(length - 1) != result.charAt(length - 1)) {
+                    if (length < 2) {
+                        result = null;
+                    } else {
+                        result = result.substring(0, length - 1);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    public static String getSubString(String targetString, int byteIndex) throws Exception {
+        if (targetString.getBytes("GBK").length < byteIndex) {
+            throw new Exception("超过长度");
+        }
+        String temp = targetString;
+        for (int i = 0; i < targetString.length(); i++) {
+            if (temp.getBytes("GBK").length <= byteIndex) {
+                break;
+            }
+            temp = temp.substring(0, temp.length() - 1);
+        }
+        return temp;
+    }
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) throws Exception {
+        String str1 = "一百二十个字符怎么就那么难弄呢我该说些啥呢算了还是先扯扯把哎还不到120个字啊让我怎么测试asdfghjklqwe哈rtuo";
+        byte[] a = str1.getBytes();
+        String str2 = getSubString(str1, 100);
+        System.out.println("--str1.length=" + str1.length() + "----Byte长度=" + a.length + "-------str2=" + str2 + "------");
+
     }
 }

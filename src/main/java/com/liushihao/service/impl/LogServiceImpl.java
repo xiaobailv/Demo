@@ -1,15 +1,14 @@
 package com.liushihao.service.impl;
 
-import com.liushihao.aspect.LogAspect;
 import com.liushihao.dao.LogDao;
 import com.liushihao.entity.Log;
 import com.liushihao.service.LogService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ import java.util.UUID;
 @Transactional
 public class LogServiceImpl implements LogService {
 
-    @Resource
+    @Autowired
     private LogDao logDao;
 
     @Override

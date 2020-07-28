@@ -15,7 +15,7 @@ public class WriteUtil {
      * @param path  指定生成文件的路径
      * @param context   指定写入文件的内容
      * @param append 是否为追加内容, false: 不追加, 会覆盖掉同名文件|true: 追加, 会在同名文件内容后追加需要写入的内容
-     * @param charsetName 设置需要指定写文件的字符编码格式
+     * @param charset 设置需要指定写文件的字符编码格式
      * @return  返回写文件的结果 "成功"|"失败"
      */
     public static String write(String path, String context, Boolean append, Charset charset) {

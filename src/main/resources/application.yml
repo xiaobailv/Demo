@@ -25,6 +25,8 @@ spring:
     job:
       # names: parentJob
       enabled: false
+  profiles:
+    active: txt
 mybatis:
   type-aliases-package: com.liushihao.entity
   mapper-locations: classpath:com/liushihao/mapper/*Mapper.xml

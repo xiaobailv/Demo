@@ -4,10 +4,11 @@ import com.liushihao.entity.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -16,11 +17,17 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 public class LogServiceTest {
 
-    @Resource
+    @Autowired
     private LogService logService;
+    @Value("${test.name}")
+    private String name;
+    @Value("${test.length}")
+    private String length;
 
     @Test
     public void queryAll() {
+        System.out.println(name);
+        System.out.println(length);
         List<Log> logs = logService.queryAll();
         for (Log log : logs) {
             System.out.println(log);

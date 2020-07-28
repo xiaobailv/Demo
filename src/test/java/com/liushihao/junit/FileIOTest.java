@@ -11,8 +11,9 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Slf4j
 public class FileIOTest {
@@ -29,7 +30,7 @@ public class FileIOTest {
         String readResult;
         String date;
         // 读文件
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\昆仑银行\\INFB-INFR\\INF20032801B"), StandardCharsets.UTF_8));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\昆仑银行\\INFB-INFR\\INF20032801B"), "GBK"));
         // 将读取到的字符串赋值给line
         String line = br.readLine();
         // 读取到的字符串信息
@@ -133,7 +134,7 @@ public class FileIOTest {
         String readResult;
         String date;
         // 读文件
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(/*filePath*/"D:\\昆仑银行\\INFB-INFR\\INF20032801R"), StandardCharsets.UTF_8));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(/*filePath*/"D:\\昆仑银行\\INFB-INFR\\INF20032801R"), "GBK"));
         // 将读取到的字符串赋值给line
         String line = br.readLine();
         // 读取到的字符串信息
@@ -216,7 +217,7 @@ public class FileIOTest {
 
     @Test
     public void readFile() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\昆仑银行\\INFB-INFR\\INF20032801B"), StandardCharsets.UTF_8));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\昆仑银行\\INFB-INFR\\INF20032801B"), UTF_8));
         String line = br.readLine();
         System.out.println(StrUtil.subWithLength(line, 0, 46));  // 000800005478820   2016041220160412PROD00000001
         System.out.println(StrUtil.subWithLength(line, 46, 526));   // 300A0006224242200000052   0000000005001560413102119003442000000    61041099674005472690   05478820   152026900141547269015200004                                        000000000000000000000000000000016566592130000   92130000   003         00D000000000060   00          D5716C33D0B3D32F07200060E0E1C800000000001E2CA19F131E949007011703900000010A010000046000B11FA7BD                          018F7C00160413156Y10000000000050015632801400000000000003F000022A000000333010102                002000003442ECC001
@@ -238,15 +239,15 @@ public class FileIOTest {
             for (List<String> strings : items) {
                 log.info("items.get(0).size() -> {}", items.get(0).size());
                 log.info("strings.get(0) -> {}", strings.get(0));
-                WriteUtil.write(fileName, strings.get(0), false, StandardCharsets.UTF_8);
+                WriteUtil.write(fileName, strings.get(0), false, UTF_8);
                 for (int i = 1; i < strings.size(); i++) {
                     log.info("strings.get(" + i + ") -> {}", strings.get(i));
                     log.info("items.get(0).size() -> {}", items.get(0).size());
-                    WriteUtil.write(fileName, strings.get(i), true, StandardCharsets.UTF_8);
+                    WriteUtil.write(fileName, strings.get(i), true, UTF_8);
                 }
             }
         } else {
-            WriteUtil.write(fileName, "", false, StandardCharsets.UTF_8);
+            WriteUtil.write(fileName, "", false, UTF_8);
             log.info("没有符合条件的数据...");
         }
     }
@@ -254,7 +255,7 @@ public class FileIOTest {
     @Test
     public void createDirectory() {
         String filePath = "D:\\Download\\aaa\\123.txt";
-        WriteUtil.write(filePath, "111111111\n", false, StandardCharsets.UTF_8);
+        WriteUtil.write(filePath, "111111111\n", false, UTF_8);
     }
 
     @Test
@@ -282,7 +283,7 @@ public class FileIOTest {
         }
         ArrayList<List<String>> lists = new ArrayList<>();
         lists.add(list);
-        WriteUtil.writeList(lists, "/home/gbatch/recon/file/20200712/A00093/OFFLINE/aaa.txt", StandardCharsets.UTF_8);
+        WriteUtil.writeList(lists, "/home/gbatch/recon/file/20200712/A00093/OFFLINE/aaa.txt", UTF_8);
     }
 
     @Test

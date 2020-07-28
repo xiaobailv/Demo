@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-public class mainTest {
+public class MainTest {
 
     public static void main(String[] args) {
         /*System.out.println(booleanTest());*/
