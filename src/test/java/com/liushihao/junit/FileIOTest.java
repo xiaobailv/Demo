@@ -11,7 +11,10 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -30,7 +33,7 @@ public class FileIOTest {
         String readResult;
         String date;
         // 读文件
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\昆仑银行\\INFB-INFR\\INF20032801B"), "GBK"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:/昆仑银行/INFB-INFR/INF20032801B"), "GBK"));
         // 将读取到的字符串赋值给line
         String line = br.readLine();
         // 读取到的字符串信息
@@ -134,7 +137,7 @@ public class FileIOTest {
         String readResult;
         String date;
         // 读文件
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(/*filePath*/"D:\\昆仑银行\\INFB-INFR\\INF20032801R"), "GBK"));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(/*filePath*/"D:/昆仑银行/INFB-INFR/INF20032801R"), "GBK"));
         // 将读取到的字符串赋值给line
         String line = br.readLine();
         // 读取到的字符串信息
@@ -217,8 +220,10 @@ public class FileIOTest {
 
     @Test
     public void readFile() throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:\\昆仑银行\\INFB-INFR\\INF20032801B"), UTF_8));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:/KL-Bank/INFB-INFR/INF20032801Bcopy"), "GBK"));
         String line = br.readLine();
+        System.out.println("\"" + StrUtil.subWithLength(line, 174, 40) + "\"");
+        System.out.println("------------------------------");
         System.out.println(StrUtil.subWithLength(line, 0, 46));  // 000800005478820   2016041220160412PROD00000001
         System.out.println(StrUtil.subWithLength(line, 46, 526));   // 300A0006224242200000052   0000000005001560413102119003442000000    61041099674005472690   05478820   152026900141547269015200004                                        000000000000000000000000000000016566592130000   92130000   003         00D000000000060   00          D5716C33D0B3D32F07200060E0E1C800000000001E2CA19F131E949007011703900000010A010000046000B11FA7BD                          018F7C00160413156Y10000000000050015632801400000000000003F000022A000000333010102                002000003442ECC001
         System.out.println(line.substring(0, 46));
@@ -254,48 +259,7 @@ public class FileIOTest {
 
     @Test
     public void createDirectory() {
-        String filePath = "D:\\Download\\aaa\\123.txt";
+        String filePath = "D:/Download/aaa/123.txt";
         WriteUtil.write(filePath, "111111111\n", false, UTF_8);
-    }
-
-    @Test
-    public void replace() {
-        // 20200710|20200615|100099|14|0|0|611001|14|1543463|882012|6217661599001060644|6217661599001060644|000|882012|156|10.00|||||12340008|008009|123026|||||
-        // 20200710|20200615|100099|14|0|0|611002|14|1543470|882012|6217661599001060644|6217661599001060644|000|882012|156|10.00|||||12340008|008010|123215|||||
-        String str = "20200710|20200615|100099|14|0|0|611001|14|1543463|882012|6217661599001060644|6217661599001060644|000|882012|156|10.00|||||12340008|008009|123026|||||\n";
-        Integer integer1 = 611001;
-        Integer integer2 = 1543463;
-        Integer integer3 = 108009;
-        Integer integer4 = 123026;
-        List<String> list = new ArrayList<>();
-        Random r = new Random();
-        StringBuilder rs = new StringBuilder();
-        for (int i = 0; i < 11000; i++) {
-            Integer integer1add = integer1++;
-            Integer integer2add = integer2++;
-            Integer integer3add = integer3++;
-            Integer integer4add = integer4++;
-            String replace = str.replace("611001", integer1add.toString());
-            String replace1 = replace.replace("1543463", integer2add.toString());
-            String replace2 = replace1.replace("008009", integer3add.toString());
-            String replace3 = replace2.replace("123026", integer4add.toString());
-            list.add(replace3);
-        }
-        ArrayList<List<String>> lists = new ArrayList<>();
-        lists.add(list);
-        WriteUtil.writeList(lists, "/home/gbatch/recon/file/20200712/A00093/OFFLINE/aaa.txt", UTF_8);
-    }
-
-    @Test
-    public void randomStr() {
-        String source = "0123456789";
-        Random r = new Random();
-        StringBuilder rs = new StringBuilder();
-        for (int j = 0; j < 6; j++) {
-            int i = r.nextInt(10);
-            rs.append(source.charAt(i));
-            System.out.println(i);
-        }
-        System.out.println("rs = " + rs);
     }
 }

@@ -53,5 +53,6 @@ public class LogDaoTest {
         for (LogNameAndResultDto logNameAndResultDto : logNameAndResultDtos) {
             System.out.println("logNameAndResultDto = " + logNameAndResultDto);
         }
+        System.out.println("logNameAndResultDtos.size() = " + logNameAndResultDtos.size());
     }
 }
