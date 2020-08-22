@@ -15,6 +15,21 @@ public class StringUtils {
      * @param length 需要截取的长度
      * @return 截取到的字符串
      */
+    public static String subStringByBytes(String str, int begin, int length, String charset) {
+        String newStr = "";
+        try {
+            // 按指定的编码获取字节数组
+            byte[] bytes = str.getBytes(charset);
+            // 按指定的长度截取新的字符数组
+            byte[] newBytes = Arrays.copyOfRange(bytes, begin, begin + length);
+            // 将新的字符数组转化为字符串
+            newStr = new String(newBytes, charset);
+        } catch (UnsupportedEncodingException e) {
+            log.info("——————字符转码异常——————");
+        }
+        return newStr;
+    }
+
     public static String subStringByBytes(String str, int begin, int length) {
         String newStr = "";
         try {
