@@ -233,4 +233,9 @@ public class StringTest {
         }
         System.out.println("rs = " + rs);
     }
+
+    @Test
+    public void name() {
+
+    }
 }
