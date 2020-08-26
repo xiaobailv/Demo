@@ -42,4 +42,12 @@ public class NumberTest {
 
         }
     }
+
+    @Test
+    public void bigDecimal() {
+        BigDecimal bigDecimal1 = new BigDecimal("100");
+        BigDecimal bigDecimal2 = new BigDecimal("7");
+        BigDecimal divide = bigDecimal1.divide(bigDecimal2, 2, BigDecimal.ROUND_HALF_UP);
+        System.out.println("divide = " + divide);
+    }
 }
