@@ -50,4 +50,10 @@ public class NumberTest {
         BigDecimal divide = bigDecimal1.divide(bigDecimal2, 2, BigDecimal.ROUND_HALF_UP);
         System.out.println("divide = " + divide);
     }
+
+    @Test
+    public void mathMin() {
+        int min = Math.min((5 + 1) * 2000, 10627);
+        System.out.println("min = " + min);
+    }
 }
