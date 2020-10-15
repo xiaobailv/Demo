@@ -1,6 +1,5 @@
-package com.liushihao.junit;
+package com.liushihao.util;
 
-import com.liushihao.util.FtpUtil;
 import org.apache.commons.net.ftp.FTPClient;
 import org.junit.Test;
 

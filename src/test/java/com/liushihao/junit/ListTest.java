@@ -88,4 +88,14 @@ public class ListTest {
         }
 //        System.out.println("stringBuilder = " + stringBuilder);
     }
+
+    @Test
+    public void contains() {
+        List<String> list = new ArrayList<>(3);
+        list.add("刘");
+        list.add("世");
+        list.add("豪");
+        System.out.println(list.contains("刘"));
+        System.out.println(list.contains("六"));
+    }
 }

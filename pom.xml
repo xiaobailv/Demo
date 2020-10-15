@@ -111,6 +111,12 @@
             <artifactId>commons-compress</artifactId>
             <version>1.18</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.jcraft/jsch SFTP -->
+        <dependency>
+            <groupId>com.jcraft</groupId>
+            <artifactId>jsch</artifactId>
+            <version>0.1.54</version>
+        </dependency>
     </dependencies>
 
     <build>

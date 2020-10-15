@@ -2,6 +2,10 @@ package com.liushihao.util;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.List;
+
 @Slf4j
 public class WriteUtil {
 
@@ -14,7 +18,7 @@ public class WriteUtil {
      * @param charset 设置需要指定写文件的字符编码格式
      * @return  返回写文件的结果 "成功"|"失败"
      */
-    /*public static String write(String path, String context, Boolean append, Charset charset) {
+    public static String write(String path, String context, Boolean append, Charset charset) {
         String result;   // 返回的flag
         String directory = path.substring(0, path.lastIndexOf("/"));
         log.info("WriteUtil中需要生成的文件路径directory ---> {}", directory);
@@ -44,7 +48,7 @@ public class WriteUtil {
         return result;
     }
 
-    *//**
+    /**
      * 可以在writer中使用该方法:
      * 如果在processor中返回了一个List集合, 那么在writer中将会给List集合再封装一层List
      * 也就是说在writer中的参数是List<? extends List<String>>
@@ -58,7 +62,7 @@ public class WriteUtil {
      * @param filePath 需要写入的文件的路径 + 文件名
      * @param charset 设置需要指定写文件的字符编码格式
      * @return 成功或失败标识
-     *//*
+     */
     public static String writeList(List<? extends List<String>> items, String filePath, Charset charset){
         String result = null;
         if (items.get(0).size() != 0) {
@@ -73,5 +77,5 @@ public class WriteUtil {
             log.info("没有符合条件的数据...");
         }
         return result;
-    }*/
+    }
 }
