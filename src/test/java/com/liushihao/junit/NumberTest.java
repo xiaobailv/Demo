@@ -49,6 +49,22 @@ public class NumberTest {
         BigDecimal bigDecimal2 = new BigDecimal("7");
         BigDecimal divide = bigDecimal1.divide(bigDecimal2, 2, BigDecimal.ROUND_HALF_UP);
         System.out.println("divide = " + divide);
+
+        BigDecimal divide1 = new BigDecimal("0.213").divide(new BigDecimal("100"), 5, BigDecimal.ROUND_HALF_UP);
+        System.out.println("divide1 = " + divide1);
+
+//        System.out.println(new BigDecimal(""));
+
+        String string = new BigDecimal("00000001025012").toString();
+        String string1 = new BigDecimal("0001025012").toString();
+        System.out.println("string = " + string);
+        System.out.println("string1 = " + string1);
+        int i = Integer.parseInt(string);
+        int i1 = Integer.parseInt(string1);
+        System.out.println(i);
+        System.out.println(i1);
+
+        System.out.println(i == i1);
     }
 
     @Test

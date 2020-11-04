@@ -2,6 +2,7 @@ package com.liushihao.junit;
 
 import cn.hutool.core.util.StrUtil;
 import com.liushihao.entity.BthIcOfflineSuccTxnTmp;
+import com.liushihao.entity.TblQrcAllTmp;
 import com.liushihao.main.T0206ReadFile;
 import com.liushihao.util.WriteUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -261,5 +264,126 @@ public class FileIOTest {
     public void createDirectory() {
         String filePath = "D:/Download/aaa/123.txt";
         WriteUtil.write(filePath, "111111111\n", false, UTF_8);
+    }
+
+    @Test
+    public void readString() {
+        BigDecimal zero = BigDecimal.ZERO;
+        String str = "            1 02 03 4 0 5541             05478820    00049992    03010000    03010000    05478820    0200 000000 00 787693 1023182609 6222525117526546                                                              000000000000000000000080547882000800049992 01080209 QRA290455412CVS 234339176441 000000031975              D00000000006                            0                                                                                                    ";
+        String mcht = str.substring(264, 279);
+        String pro = "D".equals(str.substring(319, 331).substring(0, 1)) ? "+" : "-";
+        String amt = str.substring(319, 331).substring(1);
+        pro += amt;
+        BigDecimal proAmt = new BigDecimal(pro).divide(new BigDecimal("100"), 2, BigDecimal.ROUND_HALF_UP);
+        System.out.println("mcht = " + mcht);
+        System.out.println("proAmt = " + proAmt);
+        for (int i = 0; i < 5; i++) {
+            zero = zero.add(proAmt);
+        }
+        System.out.println("zero = " + zero);
+        System.out.println("------------------");
+        BigDecimal bigDecimal = new BigDecimal(pro);
+        System.out.println("bigDecimal = " + bigDecimal);
+        System.out.println(bigDecimal.compareTo(BigDecimal.ZERO));
+    }
+
+    /**
+     * 读取条码支付对账文件测试
+     *
+     * @throws IOException
+     */
+    @Test
+    public void read() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("D:/KL-Bank/二期/条码文件/QRA0547882020201023_01_ALL/20201023_20201023_ALL.csv"), "GBK"));
+        int count = 0;
+        String string;
+        while ((string = br.readLine()) != null) {
+            if (string.substring(0, 14).contains("-")) {
+                System.out.println(string);
+                count++;
+                System.out.println("count = " + count);
+                TblQrcAllTmp tblQrcAllTmp = setTblQrcAllTmp(string);
+                System.out.println("tblQrcAllTmp.getTransDateTime() = " + tblQrcAllTmp.getTransDateTime());
+            }
+        }
+        System.out.println("count = " + count);
+    }
+
+    private TblQrcAllTmp setTblQrcAllTmp(String string) {
+//        string = "`2020-09-29 03:44:23,`,`QRA601855410FFU,`QRA601855410FFL,`QRA601855410FFU,`,`9551600000202009294359000408,`50200929134530170721,`16013222527635705039,`,`pay.unionpay.proxy.micropay,`支付成功,`01,`CNY,`10.00,`0.00,`,`,`,`,`,`,`加油站付款,`,`0.02,`0.153%,`,`0,`4I17,`中国石油天然气股份有限公司广东清远回澜西侧加油站,`,`05478820   00049992   0170720929034413,`0.00,`10.00,`9.98,`0.01,`0.02|0.153%|05478820,`11111111111";
+//        String txt = "trans_date_time,common_id,third_mcht_no,mcht_no,child_mcht_no,term_id,pl_order_no,un_order_no,mc_order_no,user_id,trans_type,trans_stat,pay_bank,curr_cd,trans_amt,ent_red_amt,plre_order_no,mcre_order_no,refund_amt,ent_red_refund_amt,refund_type,refund_stat,pro_name,mcht_date_package,trans_fee,fee_rate,term_type,local_settle_in,store_no,mcht_name,cashier,key_cup,no_coupon_amt,actual_amt,settle_amt,acq_cost_fee,reserve1,reserve2";
+        TblQrcAllTmp tblQrcAllTmp = new TblQrcAllTmp();
+        // 替换掉`
+        string = string.replace("`", "");
+        // 分割读到的字符串为数组
+        String[] split = string.split(",");
+//        String[] split1 = txt.split(",");
+//        System.out.println("split.length = " + split.length);
+//        System.out.println("split1.length = " + split1.length);
+//        Field[] declaredFields = tblQrcAllTmp.getClass().getDeclaredFields();
+//        for (int i = 0; i < declaredFields.length; i++) {
+//            Field declaredField = declaredFields[i];
+//            declaredField.setAccessible(true);
+//            System.out.println("declaredField.getName() = " + declaredField.getName());
+//            if (declaredField.getType().toString().equals("class java.math.BigDecimal")) {
+//                declaredField.set(tblQrcAllTmp, new BigDecimal(split[i]));
+//            } else {
+//                declaredField.set(tblQrcAllTmp, split[i]);
+//            }
+//        }
+
+//        for (int i = 0; i < split1.length; i++) {
+//            String s = split1[i];
+//            String s1 = split[i];
+//            System.out.println("split1[" + i + "] = " + s);
+//            System.out.println("split1[" + i + "] = " + s1);
+//        }
+
+        tblQrcAllTmp.setTransDateTime(split[0]);
+        tblQrcAllTmp.setCommonId(split[1]);
+        tblQrcAllTmp.setThirdMchtNo(split[2]);
+        tblQrcAllTmp.setMchtNo(split[3]);
+        tblQrcAllTmp.setChildMchtNo(split[4]);
+        tblQrcAllTmp.setTermId(split[5]);
+        tblQrcAllTmp.setPlOrderNo(split[6]);
+        tblQrcAllTmp.setUnOrderNo(split[7]);
+        tblQrcAllTmp.setMcOrderNo(split[8]);
+        tblQrcAllTmp.setUserId(split[9]);
+        tblQrcAllTmp.setTransType(split[10]);
+        tblQrcAllTmp.setTransStat(split[11]);
+        tblQrcAllTmp.setPayBank(split[12]);
+        tblQrcAllTmp.setCurrCd(split[13]);
+        tblQrcAllTmp.setTransAmt(new BigDecimal(isNullBigDecimal(split[14])));
+        tblQrcAllTmp.setEntRedAmt(new BigDecimal(isNullBigDecimal(split[15])));
+        tblQrcAllTmp.setPlreOrderNo(split[16]);
+        tblQrcAllTmp.setMcreOrderNo(split[17]);
+        tblQrcAllTmp.setRefundAmt(new BigDecimal(isNullBigDecimal(split[18])));
+        tblQrcAllTmp.setEntRedRefundAmt(new BigDecimal(isNullBigDecimal(split[19])));
+        tblQrcAllTmp.setRefundType(split[20]);
+        tblQrcAllTmp.setRefundStat(split[21]);
+        tblQrcAllTmp.setProName(split[22]);
+        tblQrcAllTmp.setMchtDatePackage(split[23]);
+        tblQrcAllTmp.setTransFee(new BigDecimal(isNullBigDecimal(split[24])));
+        String feeRateString = split[25].replace("%", "");
+        BigDecimal feeRate = new BigDecimal(feeRateString).divide(new BigDecimal("100"), 5, RoundingMode.HALF_UP);
+        tblQrcAllTmp.setFeeRate(feeRate);
+        tblQrcAllTmp.setTermType(split[26]);
+        tblQrcAllTmp.setLocalSettleIn(split[27]);
+        tblQrcAllTmp.setStoreNo(split[28]);
+        tblQrcAllTmp.setMchtName(split[29]);
+        tblQrcAllTmp.setCashier(split[30]);
+        tblQrcAllTmp.setPriKey(split[31]);
+        tblQrcAllTmp.setNoCouponAmt(new BigDecimal(isNullBigDecimal(split[32])));
+        tblQrcAllTmp.setActualAmt(new BigDecimal(isNullBigDecimal(split[33])));
+        tblQrcAllTmp.setSettleAmt(new BigDecimal(isNullBigDecimal(split[34])));
+        tblQrcAllTmp.setAcqCostFee(new BigDecimal(isNullBigDecimal(split[35])));
+        tblQrcAllTmp.setThreeColums(split[36]);
+        tblQrcAllTmp.setInsIdCd(split[37]);
+
+        return tblQrcAllTmp;
+    }
+
+    private String isNullBigDecimal(String string) {
+        return string.equals("") ? "0" : string;
     }
 }

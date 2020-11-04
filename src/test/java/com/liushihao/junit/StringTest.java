@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -51,6 +53,18 @@ public class StringTest {
         System.out.println(str.substring(8, 9));
         System.out.println(str.substring(8, 9));
         System.out.println(str.substring(1));
+
+        System.out.println("--------------");
+
+        String str3 = "2020-10-23 17:58:36";
+        System.out.println(str3.substring(0, 10).replace("-", ""));
+        System.out.println(str3.substring(11));
+
+        String str4 = "0.00|0.200%|2018060860301976";
+        String[] split = str4.split("\\|");
+        System.out.println("split[0] = " + split[0]);
+        System.out.println("split[1] = " + new BigDecimal(split[1].replace("%", "")).divide(new BigDecimal("100"), 5, RoundingMode.HALF_UP));
+        System.out.println("split[2] = " + split[2]);
     }
 
     @Test
@@ -102,6 +116,12 @@ public class StringTest {
         }
         System.out.println(str.replace("YYYYMMDD", "12345678"));
         System.out.println(str1.replace("YYMMDD", "123456"));
+        String str2 = "1~|~2~|~3~|~4~|~5~|~";
+        String[] split = str2.split("~\\|~");
+        for (int i = 0; i < split.length; i++) {
+            String s = split[i];
+            System.out.println("s = " + s);
+        }
     }
 
     @Test
@@ -234,4 +254,11 @@ public class StringTest {
         System.out.println("rs = " + rs);
     }
 
+    @Test
+    public void chinese() {
+        String str1 = "（";
+        String str2 = "(";
+        System.out.println(str1.getBytes(UTF_8).length);
+        System.out.println(str2.getBytes(UTF_8).length);
+    }
 }

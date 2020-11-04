@@ -18,6 +18,7 @@ public class CompareToTest {
         BigDecimal fee1 = new BigDecimal(1);
         BigDecimal fee2 = new BigDecimal(-1);
         BigDecimal fee3 = new BigDecimal(0.001);
+        BigDecimal fee4 = new BigDecimal("0");
         BigDecimal num = new BigDecimal(0.001);
         System.out.println(fee1.compareTo(new BigDecimal(0.001)));
         System.out.println(fee2.compareTo(new BigDecimal(0.001)));
@@ -51,6 +52,13 @@ public class CompareToTest {
         System.out.println(fee2.divide(new BigDecimal(100.00)).negate());  // 0.01
         System.out.println(fee1.compareTo(BigDecimal.ZERO));
         System.out.println(BigDecimal.ZERO);
+
+        int i = fee1.compareTo(BigDecimal.ZERO);
+        int i1 = fee2.compareTo(BigDecimal.ZERO);
+        int i2 = fee4.compareTo(BigDecimal.ZERO);
+        System.out.println("i = " + i);
+        System.out.println("i1 = " + i1);
+        System.out.println("i2 = " + i2);
     }
 
     @Test
