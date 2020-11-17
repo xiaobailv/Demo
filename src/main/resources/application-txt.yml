@@ -1,4 +1,8 @@
 test.name: name
 test.length: 1
-#T9101
+
+# T9101
 qrcAll.memberVariableNames: trans_date_time,common_id,third_mcht_no,mcht_no,child_mcht_no,term_id,pl_order_no,un_order_no,mc_order_no,user_id,trans_type,trans_stat,pay_bank,curr_cd,trans_amt,ent_red_amt,plre_order_no,mcre_order_no,refund_amt,ent_red_refund_amt,refund_type,refund_stat,pro_name,mcht_date_package,trans_fee,fee_rate,term_type,local_settle_in,store_no,mcht_name,cashier,key_cup,no_coupon_amt,actual_amt,settle_amt,acq_cost_fee,reserve1,reserve2
+
+# 空格
+testSpace: null,2,3,4,5

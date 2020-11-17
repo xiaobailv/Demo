@@ -21,8 +21,8 @@ public class HashMapTest {
     @Test
     public void loop() {
         Map<Integer, Integer> map = new HashMap<>();
-        map.put(1, 10);
-        map.put(2, 20);
+//        map.put(1, 10);
+//        map.put(2, 20);
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }

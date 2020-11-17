@@ -3,7 +3,13 @@ package com.liushihao.junit;
 import com.liushihao.entity.Log;
 import com.liushihao.entity.User;
 import com.liushihao.util.WriteUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -11,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +25,21 @@ import java.util.Random;
 import static java.lang.Integer.parseInt;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+@Slf4j
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class StringTest {
+
+    @Autowired
+    private StringEncryptor stringEncryptor;
+
+    @Test
+    public void encryptPwd() {
+        String encrypt = stringEncryptor.encrypt("123"); // ZexzBz529SG4GlfEYSrrAw==
+        System.out.println("================");
+        System.out.println(encrypt);
+        System.out.println("================");
+    }
 
     private Integer integer = null;
 
@@ -149,7 +168,7 @@ public class StringTest {
 
     @Test
     public void readeFileGbk() throws IOException {
-        WriteUtil.write("D:/Download/aaa.txt", "测试刘世豪", false, Charset.forName("GBK"));
+        WriteUtil.write("D:/Download/aaa.txt", "测试刘世豪", false);
         //设置reader需要的Resource
         String filePath = "D:\\KL-Bank\\INFB-INFR\\INF20032801B";
         filePath = "D:/Download/aaa.txt";
@@ -238,7 +257,7 @@ public class StringTest {
         }
         ArrayList<List<String>> lists = new ArrayList<>();
         lists.add(list);
-        WriteUtil.writeList(lists, "/home/gbatch/recon/file/20200712/A00093/OFFLINE/aaa.txt", UTF_8);
+        WriteUtil.writeList(lists, "/home/gbatch/recon/file/20200712/A00093/OFFLINE/aaa.txt");
     }
 
     @Test
@@ -260,5 +279,7 @@ public class StringTest {
         String str2 = "(";
         System.out.println(str1.getBytes(UTF_8).length);
         System.out.println(str2.getBytes(UTF_8).length);
+        String str3 = "";
+        System.out.println(str3 == null ? "null" : "空串");
     }
 }

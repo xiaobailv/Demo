@@ -8,10 +8,7 @@ import com.liushihao.util.WriteUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -19,10 +16,48 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 @Slf4j
 public class FileIOTest {
+
+    @Test
+    public void writeNoLine() {
+        List<List<String>> lists = new ArrayList<>();
+        List<String> strings = new ArrayList<>();
+        strings.add("1\n");
+        strings.add("2\n");
+        strings.add("3\n");
+        strings.add("4\n");
+        strings.add("5\n");
+        strings.add("6\n");
+        lists.add(strings);
+        /*List<String> list = lists.get(0);
+        if (list.size() != 0) {
+            System.out.println(list.get(0));
+            for (int i = 0; i < list.size() - 1; i++) {
+                System.out.print(list.get(i));
+            }
+            System.out.println("循环结束");
+            String s = list.get(list.size() - 1);
+            System.out.print(s);
+            String replace = s.replace("\n", "aa");
+            System.out.print(replace);
+        } else {
+            log.info("没有符合条件的数据...");
+        }*/
+        WriteUtil.writeList(lists, "D:/Download/a.txt");
+    }
+
+    @Test
+    public void fileExist() throws InterruptedException {
+        File file = new File("D:/Download/a.txt");
+        boolean exists = false;
+        while (!exists) {
+            exists = file.exists();
+            System.out.println("文件不存在");
+            Thread.sleep(5000);
+        }
+        System.out.println("文件已存在");
+    }
 
     @Test
     public void readFileSuccess() throws IOException {
@@ -247,15 +282,15 @@ public class FileIOTest {
             for (List<String> strings : items) {
                 log.info("items.get(0).size() -> {}", items.get(0).size());
                 log.info("strings.get(0) -> {}", strings.get(0));
-                WriteUtil.write(fileName, strings.get(0), false, UTF_8);
+                WriteUtil.write(fileName, strings.get(0), false);
                 for (int i = 1; i < strings.size(); i++) {
                     log.info("strings.get(" + i + ") -> {}", strings.get(i));
                     log.info("items.get(0).size() -> {}", items.get(0).size());
-                    WriteUtil.write(fileName, strings.get(i), true, UTF_8);
+                    WriteUtil.write(fileName, strings.get(i), true);
                 }
             }
         } else {
-            WriteUtil.write(fileName, "", false, UTF_8);
+            WriteUtil.write(fileName, "", false);
             log.info("没有符合条件的数据...");
         }
     }
@@ -263,7 +298,7 @@ public class FileIOTest {
     @Test
     public void createDirectory() {
         String filePath = "D:/Download/aaa/123.txt";
-        WriteUtil.write(filePath, "111111111\n", false, UTF_8);
+        WriteUtil.write(filePath, "111111111\n", false);
     }
 
     @Test

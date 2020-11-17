@@ -18,7 +18,7 @@ spring:
     url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: 123
+    password: ENC(ZexzBz529SG4GlfEYSrrAw==)
     schema: classpath:/org/springframework/batch/core/schema-mysql.sql  # 指定需要创建的batch任务表
   batch:
     initialize-schema: always
@@ -30,7 +30,6 @@ spring:
 mybatis:
   type-aliases-package: com.liushihao.entity
   mapper-locations: classpath:com/liushihao/mapper/*Mapper.xml
-
 # 日志
 logging:
   # 日志等级
@@ -52,3 +51,7 @@ logging:
     # 控制台的日志输出格式
     #    console: %d{yyyy-MM-dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n
 #    file: %d{yyyy-MM-dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n
+# 设置加密密钥 运行项目的时候 在后面拼接 --jasypt.encryptor.password=123456
+#jasypt:
+#  encryptor:
+#    password: hn

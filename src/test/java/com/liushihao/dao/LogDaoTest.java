@@ -4,6 +4,7 @@ import com.liushihao.entity.Log;
 import com.liushihao.entity.LogNameAndResultDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -22,11 +23,17 @@ public class LogDaoTest {
         logDao.insert(new Log("1", "test", new Date(), "111", "111"));
     }
 
+    @Value("${testSpace}")
+    private String[] testSpace;
     @Test
     public void selectAll() {
         List<Log> logs = logDao.selectAll();
         for (Log log : logs) {
             System.out.println(log);
+        }
+        for (int i = 0; i < testSpace.length; i++) {
+            String s = testSpace[i];
+            System.out.println("s = " + s);
         }
     }
 

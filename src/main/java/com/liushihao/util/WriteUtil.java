@@ -3,7 +3,6 @@ package com.liushihao.util;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.util.List;
 
 @Slf4j
@@ -18,7 +17,7 @@ public class WriteUtil {
      * @param charset 设置需要指定写文件的字符编码格式
      * @return  返回写文件的结果 "成功"|"失败"
      */
-    public static String write(String path, String context, Boolean append, Charset charset) {
+    public static String write(String path, String context, Boolean append) {
         String result;   // 返回的flag
         String directory = path.substring(0, path.lastIndexOf("/"));
         log.info("WriteUtil中需要生成的文件路径directory ---> {}", directory);
@@ -36,7 +35,7 @@ public class WriteUtil {
                 throw new RuntimeException("创建文件失败...");
             }
         }
-        try (BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, append), charset))) {  // 此处的true表示可以向文件中追加内容
+        try (BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, append), "GBK"))) {  // 此处的true表示可以向文件中追加内容
             fileWriter.write(context);
             log.info("写入成功!!!" + (append ? "追加" : "非追加"));
             fileWriter.close();
@@ -60,20 +59,20 @@ public class WriteUtil {
      *
      * @param items 需要遍历的List集合
      * @param filePath 需要写入的文件的路径 + 文件名
-     * @param charset 设置需要指定写文件的字符编码格式
      * @return 成功或失败标识
      */
-    public static String writeList(List<? extends List<String>> items, String filePath, Charset charset){
+    public static String writeList(List<? extends List<String>> items, String filePath){
         String result = null;
-        if (items.get(0).size() != 0) {
-            for (List<String> strings : items) {
-                result = write(filePath, strings.get(0), false, charset);
-                for (int i = 1; i < strings.size(); i++) {
-                    result = write(filePath, strings.get(i), true, charset);
-                }
+        List<String> list = items.get(0);
+        if (list.size() != 0) {
+            write(filePath, list.get(0), false);
+            for (int i = 1; i < list.size() - 1; i++) {
+                write(filePath, list.get(i), true);
             }
+            String replace = list.get(list.size() - 1).replace("\n", "");
+            result = write(filePath, replace, true);
         } else {
-            result = write(filePath, "", false, charset);
+            result = write(filePath, "", false);
             log.info("没有符合条件的数据...");
         }
         return result;
