@@ -53,6 +53,7 @@ public class CompareToTest {
         System.out.println(fee1.compareTo(BigDecimal.ZERO));
         System.out.println(BigDecimal.ZERO);
 
+        // fee1 = 1, fee2 = -1, fee4 = 0
         int i = fee1.compareTo(BigDecimal.ZERO);
         int i1 = fee2.compareTo(BigDecimal.ZERO);
         int i2 = fee4.compareTo(BigDecimal.ZERO);
@@ -73,5 +74,12 @@ public class CompareToTest {
         BigDecimal divide = new BigDecimal("00000000029").add(BigDecimal.ONE).divide(new BigDecimal("100.0"));
         BigDecimal multiply = BigDecimal.valueOf(-1).multiply(divide);
         System.out.println("multiply = " + multiply);
+    }
+
+    @Test
+    public void negate() {
+        BigDecimal bigDecimal = new BigDecimal("-10.302");
+        BigDecimal negate = bigDecimal.negate();
+        System.out.println("negate = " + negate);
     }
 }
