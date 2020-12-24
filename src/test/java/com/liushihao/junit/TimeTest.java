@@ -1,5 +1,6 @@
 package com.liushihao.junit;
 
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.DateUtil;
 import org.junit.Test;
 
@@ -8,9 +9,10 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
-import java.util.*;
+import java.util.Date;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * @author 刘世豪
@@ -18,6 +20,7 @@ import java.util.*;
  * @description
  * @updateTime 2020/5/27 9:25
  */
+@Slf4j
 public class TimeTest {
 
     @Test
@@ -55,9 +58,13 @@ public class TimeTest {
     public void localDate() {
         // ========== LocalDate构造 ==========
         LocalDate localDate = LocalDate.now();
-        LocalDate localDate2 = LocalDate.of(2019, 8, 25);
+        LocalDate localDate2 = LocalDate.of(2020, 11, 30);
         System.out.println("localDate1 = " + localDate);        // 获取当前时间: 2020-06-01
         System.out.println("localDate2 = " + localDate2);       // 获取指定时间: 2020-06-01
+        long until = localDate2.until(localDate, DAYS);
+        System.out.println("until = " + until);
+        long between = DAYS.between(localDate2, localDate);
+        System.out.println("between = " + between);
 
         // ========== LocalDate获取当前时间属性 ==========
         System.out.println(localDate.getYear());                // 获取当前年份: 2020
@@ -89,7 +96,7 @@ public class TimeTest {
 
         // ========== LocalDate当前时间支持的类型 ==========
         System.out.println(localDate.isSupported(ChronoField.DAY_OF_YEAR));    // 当前时间支持的时间类型是：一年中的某一天，这个不知道应用场景
-        System.out.println(localDate.isSupported(ChronoUnit.DAYS));            // 当前日期支持的单元：天(说明当前时间是按天来算的)
+        System.out.println(localDate.isSupported(DAYS));            // 当前日期支持的单元：天(说明当前时间是按天来算的)
 
         System.out.println(localDate.with(TemporalAdjusters.firstDayOfMonth()));            // 本月的第1天
         System.out.println(localDate.with(TemporalAdjusters.firstDayOfNextMonth()));        // 下月的第1天
@@ -180,5 +187,22 @@ public class TimeTest {
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyyMMdd");
         String retStrFormatNowDate = sdFormatter.format(new Date());
         System.out.println("retStrFormatNowDate = " + retStrFormatNowDate);
+    }
+
+    @Test
+    public void parse() {
+        String startDate = "20201224";
+        String endDate = "20201201";
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        sdf.setLenient(false);
+        try {
+            sdf.parse(startDate);
+            sdf.parse(endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (endDate.compareTo(startDate) < 0) {
+            log.error("查询结束时间不能小于开始时间");
+        }
     }
 }

@@ -2,7 +2,7 @@
 server:
   port: 9090
   servlet:
-    #context-path: /jsp
+    context-path: /junit
     jsp:
       init-parameters:
         development: true
@@ -11,7 +11,7 @@ spring:
   mvc:
     view:
       prefix: /
-      suffix: .jsp
+      suffix: .html
 # 数据源
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -52,6 +52,6 @@ logging:
     #    console: %d{yyyy-MM-dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n
 #    file: %d{yyyy-MM-dd-HH:mm:ss} [%thread] %-5level %logger- %msg%n
 # 设置加密密钥 运行项目的时候 在后面拼接 --jasypt.encryptor.password=123456
-#jasypt:
-#  encryptor:
-#    password: hn
+jasypt:
+  encryptor:
+    password: hn

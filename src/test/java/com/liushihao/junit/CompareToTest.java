@@ -20,6 +20,9 @@ public class CompareToTest {
         BigDecimal fee3 = new BigDecimal(0.001);
         BigDecimal fee4 = new BigDecimal("0");
         BigDecimal num = new BigDecimal(0.001);
+        System.out.println("以下为BigDecimal取反");
+        System.out.println(fee1.divide(new BigDecimal(100.00)).negate());
+        System.out.println(fee2.divide(new BigDecimal(100.00)).negate());
         System.out.println(fee1.compareTo(new BigDecimal(0.001)));
         System.out.println(fee2.compareTo(new BigDecimal(0.001)));
         System.out.println(fee3.compareTo(new BigDecimal(0.001)));
@@ -48,8 +51,6 @@ public class CompareToTest {
         System.out.println("5".compareTo(count));
         System.out.println("=========");
         System.out.println(fee2.subtract(fee1).abs());
-        System.out.println("以下为BigDecimal取反");
-        System.out.println(fee2.divide(new BigDecimal(100.00)).negate());  // 0.01
         System.out.println(fee1.compareTo(BigDecimal.ZERO));
         System.out.println(BigDecimal.ZERO);
 

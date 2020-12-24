@@ -6,10 +6,8 @@ import com.liushihao.util.WriteUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.platform.commons.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -26,8 +24,8 @@ import static java.lang.Integer.parseInt;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Slf4j
-@SpringBootTest
-@RunWith(SpringRunner.class)
+// @SpringBootTest
+// @RunWith(SpringRunner.class)
 public class StringTest {
 
     @Autowired
@@ -84,6 +82,11 @@ public class StringTest {
         System.out.println("split[0] = " + split[0]);
         System.out.println("split[1] = " + new BigDecimal(split[1].replace("%", "")).divide(new BigDecimal("100"), 5, RoundingMode.HALF_UP));
         System.out.println("split[2] = " + split[2]);
+
+        String str5 = "20201023";
+        System.out.println(str5.substring(0, 4));
+        System.out.println(str5.substring(4, 6));
+        System.out.println(str5.substring(6, 8));
     }
 
     @Test
@@ -98,10 +101,12 @@ public class StringTest {
     @Test
     public void stringArray() {
         String[] strings = new String[]{"0123456789", "9876543210"};
-        String string1 = strings[0];
-        String string2 = strings[1];
-        System.out.println("string1 = " + string1);
-        System.out.println("string2 = " + string2);
+        System.out.println("string1 = " + strings[0]);
+        System.out.println("string2 = " + strings[1]);
+        strings[0] = "string1";
+        strings[1] = "string2";
+        System.out.println("string1 = " + strings[0]);
+        System.out.println("string2 = " + strings[1]);
     }
 
     @Test
@@ -140,6 +145,21 @@ public class StringTest {
         for (int i = 0; i < split.length; i++) {
             String s = split[i];
             System.out.println("s = " + s);
+        }
+        System.out.println("-----------------");
+        List<String> list = new ArrayList<>();
+        list.add("刷卡手续费机构支出文件1");
+        list.add("刷卡手续费机构支出文件2");
+        list.add("刷卡手续费机构收入文件2");
+        list.add("刷卡手续费机构收入文件1");
+        int i = 0;
+        for (String s : list) {
+            i++;
+            if (s.contains("收入")) {
+                System.out.println("收入" + i);
+            } else {
+                System.out.println("支出" + i);
+            }
         }
     }
 
@@ -281,5 +301,23 @@ public class StringTest {
         System.out.println(str2.getBytes(UTF_8).length);
         String str3 = "";
         System.out.println(str3 == null ? "null" : "空串");
+    }
+
+    @Test
+    public void isBlank() {
+        String str = "11111";
+        String str2;
+        double v = Math.random() * 10;
+        int i = (int) v;
+        System.out.println(i);
+        System.out.println(StringUtils.isBlank(str));       // false
+        System.out.println(StringUtils.isNotBlank(str));    // true
+        if (i > 5) {
+            str2 = "str2";
+        } else {
+            str2 = null;
+        }
+        System.out.println(StringUtils.isBlank(str2));
+        System.out.println(StringUtils.isNotBlank(str2));
     }
 }
