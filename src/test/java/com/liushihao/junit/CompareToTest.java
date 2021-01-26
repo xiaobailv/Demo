@@ -80,7 +80,10 @@ public class CompareToTest {
     @Test
     public void negate() {
         BigDecimal bigDecimal = new BigDecimal("-10.302");
+        BigDecimal bigDecimal2 = new BigDecimal("0");
         BigDecimal negate = bigDecimal.negate();
+        BigDecimal negate2 = bigDecimal2.negate();
         System.out.println("negate = " + negate);
+        System.out.println("negate2 = " + negate2);
     }
 }

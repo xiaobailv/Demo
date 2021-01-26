@@ -2,7 +2,9 @@ package com.liushihao.junit;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class ListTest {
 
@@ -78,10 +80,15 @@ public class ListTest {
         list.add("1");
         list.add("2");
         list.add("3");
+        list.add("4");
+        list.add("5");
         System.out.println("第一个" + list.get(0));
-        for (int i = 1; i < list.size(); i++) {
+        list.forEach(i -> {
+            System.out.println("i = " + i);
+        });
+        /*for (int i = 1; i < list.size(); i++) {
             System.out.println(list.get(i));
-        }
+        }*/
         System.out.println("=======");
         for (int i = 1; i < 1; i++) {
             System.out.println(list.get(i));

@@ -187,6 +187,9 @@ public class TimeTest {
         SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyyMMdd");
         String retStrFormatNowDate = sdFormatter.format(new Date());
         System.out.println("retStrFormatNowDate = " + retStrFormatNowDate);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        String format = sdf.format(new Date());
+        System.out.println("format = " + format);
     }
 
     @Test
@@ -204,5 +207,13 @@ public class TimeTest {
         if (endDate.compareTo(startDate) < 0) {
             log.error("查询结束时间不能小于开始时间");
         }
+    }
+
+    @Test
+    public void newDate() {
+        String date = "202008";
+        DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate yyyyMM = LocalDate.parse(date+"01", sdf).with(TemporalAdjusters.firstDayOfMonth());
+        System.out.println("yyyyMM = " + yyyyMM.format(sdf));
     }
 }

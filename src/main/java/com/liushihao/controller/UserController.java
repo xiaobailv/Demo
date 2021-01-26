@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/user")
+// @RestController
 public class UserController {
 
     @RequestMapping("/index")

@@ -14,12 +14,19 @@ spring:
       suffix: .html
 # 数据源
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    # MySQL数据库
+    #driver-class-name: com.mysql.jdbc.Driver
+    #url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    #type: com.alibaba.druid.pool.DruidDataSource
+    #username: root
+    #password: ENC(ZexzBz529SG4GlfEYSrrAw==)
+    # Oracle数据库
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
     type: com.alibaba.druid.pool.DruidDataSource
-    username: root
-    password: ENC(ZexzBz529SG4GlfEYSrrAw==)
-    schema: classpath:/org/springframework/batch/core/schema-mysql.sql  # 指定需要创建的batch任务表
+    username: hr
+    password: hr
+    #schema: classpath:/org/springframework/batch/core/schema-mysql.sql  # 指定需要创建的batch任务表
   batch:
     initialize-schema: always
     job:

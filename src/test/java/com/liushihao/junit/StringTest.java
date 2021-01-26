@@ -58,6 +58,8 @@ public class StringTest {
     @Test
     public void stringSubstring() {
         String str = "09F3712345678901";
+        System.out.println("str.substring(0) = " + str.substring(0));
+        System.out.println("str.substring(1) = " + "X" + str.substring(1));
         if (str.endsWith("01")) {
             System.out.println("成功");
         }
@@ -87,6 +89,15 @@ public class StringTest {
         System.out.println(str5.substring(0, 4));
         System.out.println(str5.substring(4, 6));
         System.out.println(str5.substring(6, 8));
+
+        System.out.println("----------------");
+        String str6 = "123.xlsx";
+        String str7 = ".123xlsx";
+        String str8 = "123xlsx";
+        System.out.println(str6.indexOf("."));
+        System.out.println(str7.indexOf("."));
+        System.out.println(str8.indexOf("."));
+        System.out.println(str6.substring(str6.lastIndexOf(".")));
     }
 
     @Test
@@ -306,7 +317,9 @@ public class StringTest {
     @Test
     public void isBlank() {
         String str = "11111";
-        String str2;
+        String str2 = "";
+        System.out.println(StringUtils.isBlank(str2));
+        System.out.println(StringUtils.isNotBlank(str2));
         double v = Math.random() * 10;
         int i = (int) v;
         System.out.println(i);

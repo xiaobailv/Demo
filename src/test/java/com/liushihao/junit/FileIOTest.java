@@ -7,17 +7,49 @@ import com.liushihao.main.T0206ReadFile;
 import com.liushihao.util.WriteUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 public class FileIOTest {
+
+    @Test
+    public void filePath() throws IOException {
+        String fileName = "src/test/resource/新建文本文档.txt";
+        FileInputStream fileInputStream = new FileInputStream(fileName);
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+        int read = bufferedInputStream.read(new byte[1024]);
+        System.out.println("read = " + read);
+
+    }
+
+    @Test
+    public void getProperties() {
+        String path = "report/file_transfer.properties";
+        StringBuilder stringBuilder = new StringBuilder();
+        Properties properties = null;
+        try {
+            properties = PropertiesLoaderUtils.loadAllProperties(path);
+        } catch (IOException e) {
+            log.error("获取配置文件出错", e);
+        }
+        assert properties != null;
+        String homeDir = properties.getProperty("path");
+        log.info("homeDir = {}", homeDir);
+        stringBuilder.append(homeDir).append("/");
+        stringBuilder.append("instOprReport").append("/");
+        stringBuilder.append("Inst_Parm_Mnt").append(".xls");
+        String string = stringBuilder.toString();
+        log.info("string = {}", string);
+        int i = string.lastIndexOf("/");
+        log.info("i = {}", i);
+        String substring = string.substring(i + 1);
+        log.info("substring = {}", substring);
+    }
 
     @Test
     public void writeNoLine() {
