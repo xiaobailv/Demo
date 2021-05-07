@@ -17,6 +17,17 @@ public class AlbumDaoTest {
     private AlbumDao albumDao;
 
     @Test
+    public void nullTest() {
+        Album album = new Album();
+        album.setId("222");
+        album = albumDao.selectOne(album);
+        System.out.println("album = " + album);
+        if (null != album && album.getTitle().equals("2")) {
+            System.out.println("执行逻辑");
+        }
+    }
+
+    @Test
     public void selectBycount() {
         List<Album> albums = albumDao.selectBycount(0);
         for (Album album : albums) {

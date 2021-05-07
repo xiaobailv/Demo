@@ -30,6 +30,31 @@ public class StringTest {
 
     @Autowired
     private StringEncryptor stringEncryptor;
+    
+    /**
+     * @param args
+     */
+    public static void main(String[] args) throws Exception {
+        String str1 = "一百二十个字符怎么就那么难弄呢我该说些啥呢算了还是先扯扯把哎还不到120个字啊让我怎么测试asdfghjklqwe哈rtuo";
+        byte[] a = str1.getBytes();
+        String str2 = getSubString(str1, 100);
+        System.out.println("--str1.length=" + str1.length() + "----Byte长度=" + a.length + "-------str2=" + str2 + "------");
+        String str3 = "";
+        System.out.println(str3.length());
+        
+    }
+
+    @Test
+    public void trimString() {
+        String str1 = "   1   2   3   ";
+        System.out.println(str1.trim());    // 只能去除左边和右边的空格
+    }
+
+    @Test
+    public void length() {
+        String str = "20210219";
+        System.out.println(str.length());
+    }
 
     @Test
     public void encryptPwd() {
@@ -47,6 +72,25 @@ public class StringTest {
     }
 
     @Test
+    public void withAndOr() {
+        String strA = "购车分期";
+        String strB = "担保A";
+        String str1 = "购车分期";
+        String str2 = "担保A";
+        String str3 = "担保B";
+        if (strA.equals(str1) && !strB.equals(str2) && !strB.equals(str3)) {
+            System.out.println("为购车产品且办理模式不为担保模式");
+        } else {
+            System.out.println("为购车产品但办理模式为担保模式");
+        }
+        if (strA.equals(str1) && (!strB.equals(str2) && !strB.equals(str3))) {
+            System.out.println("为购车产品且办理模式不为担保模式");
+        } else {
+            System.out.println("为购车产品但办理模式为担保模式");
+        }
+    }
+
+    @Test
     public void stringFormat() {
         String str = "01234567890";
         System.out.println(String.format("%-19s", str));                    // "0123456789         "后面补齐空格
@@ -58,6 +102,9 @@ public class StringTest {
     @Test
     public void stringSubstring() {
         String str = "09F3712345678901";
+        int length = str.length();
+        System.out.println("length = " + length);
+        System.out.println(str.substring(length - 4, length));
         System.out.println("str.substring(0) = " + str.substring(0));
         System.out.println("str.substring(1) = " + "X" + str.substring(1));
         if (str.endsWith("01")) {
@@ -252,17 +299,6 @@ public class StringTest {
         return temp;
     }
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) throws Exception {
-        String str1 = "一百二十个字符怎么就那么难弄呢我该说些啥呢算了还是先扯扯把哎还不到120个字啊让我怎么测试asdfghjklqwe哈rtuo";
-        byte[] a = str1.getBytes();
-        String str2 = getSubString(str1, 100);
-        System.out.println("--str1.length=" + str1.length() + "----Byte长度=" + a.length + "-------str2=" + str2 + "------");
-
-    }
-
     @Test
     public void replace() {
         // 20200710|20200615|100099|14|0|0|611001|14|1543463|882012|6217661599001060644|6217661599001060644|000|882012|156|10.00|||||12340008|008009|123026|||||
@@ -318,8 +354,15 @@ public class StringTest {
     public void isBlank() {
         String str = "11111";
         String str2 = "";
+        String str3 = "             ";
+        System.out.println("-------------isBlank-------------");
+        System.out.println(StringUtils.isBlank(str));
         System.out.println(StringUtils.isBlank(str2));
+        System.out.println(StringUtils.isBlank(str3));
+        System.out.println("-------------isBlank-------------");
+
         System.out.println(StringUtils.isNotBlank(str2));
+        System.out.println(str3.length());
         double v = Math.random() * 10;
         int i = (int) v;
         System.out.println(i);

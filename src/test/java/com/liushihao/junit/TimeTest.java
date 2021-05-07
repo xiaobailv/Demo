@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.util.DateUtil;
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -11,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -22,6 +24,49 @@ import static java.time.temporal.ChronoUnit.DAYS;
  */
 @Slf4j
 public class TimeTest {
+
+    @Test
+    public void simpleDateFormat() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        String format = sdf.format(new Date());
+        System.out.println("format = " + format);
+    }
+
+    @Test
+    public void timeStamp() {
+        // 当前日期
+//        Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+        // 当前系统时间
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(sdf1.format(new Date(now.getTime())));
+        Timestamp timestamp1 = Timestamp.valueOf("2021-02-19 10:18:00");
+        Timestamp timestamp2 = Timestamp.valueOf("2021-02-24 17:26:00");
+        System.out.println(TimeUnit.MILLISECONDS.toSeconds(timestamp2.getTime() - timestamp1.getTime()));
+        System.out.println(TimeUnit.MILLISECONDS.toSeconds(now.getTime() - timestamp1.getTime()));
+        // compareTo()对比两个时间, 前者比后者大返回1, 后者比前者大返回-1, 相等则返回0
+        System.out.println(now.compareTo(timestamp1));  // 1
+        System.out.println(timestamp1.compareTo(now));  // -1
+        System.out.println(now.compareTo(now)); // 0
+        long time = now.getTime();
+        System.out.println("time = " + time);
+        long differ1 = TimeUnit.MILLISECONDS.toDays(now.getTime() - timestamp2.getTime());
+        long differ2 = TimeUnit.DAYS.toDays(now.getTime() - timestamp2.getTime());
+        System.out.println("differ1 = " + differ1);
+        System.out.println("differ2 = " + differ2);
+        String timeString1 = "20210222";
+        String timeString2 = "20210325";
+        int compareTo = timeString1.compareTo(timeString2);
+        System.out.println("compareTo = " + compareTo);
+        String year = timeString2.substring(0, 4);
+        String month = timeString2.substring(4, 6);
+        String day = timeString2.substring(6, 8);
+        String sdfString = "%s-%s-%s 00:00:00";
+        sdfString = String.format(sdfString, year, month, day);
+        System.out.println("sdfString = " + sdfString);
+        Timestamp timestamp3 = Timestamp.valueOf(sdfString);
+        System.out.println(TimeUnit.MILLISECONDS.toDays(now.getTime() - timestamp3.getTime()));
+    }
 
     @Test
     public void testData() {
@@ -161,7 +206,7 @@ public class TimeTest {
         System.out.println(instant.getNano());             // 纳秒数 486000000
         System.out.println(instant.getEpochSecond());      // 1970年到现在的秒数1590999802
         System.out.println(instant.toEpochMilli());        // 1970年到现在的毫秒数(和new Date().getTime() System.currentTimeMillis 一样)
-                                                           // 1590999802486
+        // 1590999802486
         // ========== Instant 时间区间的加减 省略,用法基本一致 ==========
     }
 
@@ -213,7 +258,7 @@ public class TimeTest {
     public void newDate() {
         String date = "202008";
         DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate yyyyMM = LocalDate.parse(date+"01", sdf).with(TemporalAdjusters.firstDayOfMonth());
+        LocalDate yyyyMM = LocalDate.parse(date + "01", sdf).with(TemporalAdjusters.firstDayOfMonth());
         System.out.println("yyyyMM = " + yyyyMM.format(sdf));
     }
 }

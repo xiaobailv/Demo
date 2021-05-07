@@ -8,15 +8,17 @@ import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
 /**
  * 实现文件[夹]解压
- * @author ljheee
  *
+ * @author ljheee
  */
 public class UnZipFile {
 
     /**
      * 解压到指定目录
+     *
      * @param zipPath
      * @param descDir
      */
@@ -27,25 +29,27 @@ public class UnZipFile {
     /**
      * 解压文件到指定目录
      * 解压后的文件名，和之前一致
-     * @param zipFile	待解压的zip文件
-     * @param descDir 	指定目录
+     *
+     * @param zipFile 待解压的zip文件
+     * @param descDir 指定目录
      */
     @SuppressWarnings("rawtypes")
     public static void unZipFiles(File zipFile, String descDir) throws IOException {
 
-        ZipFile zip = new ZipFile(zipFile,Charset.forName("GBK"));//解决中文文件夹乱码
-        String name = zip.getName().substring(zip.getName().lastIndexOf('\\')+1, zip.getName().lastIndexOf('.'));
+        // 解决中文文件夹乱码
+        ZipFile zip = new ZipFile(zipFile, Charset.forName("GBK"));
+        String name = zip.getName().substring(zip.getName().lastIndexOf('\\') + 1, zip.getName().lastIndexOf('.'));
 
-        File pathFile = new File(descDir+name);
+        File pathFile = new File(descDir + name);
         if (!pathFile.exists()) {
             pathFile.mkdirs();
         }
 
-        for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements();) {
+        for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements(); ) {
             ZipEntry entry = (ZipEntry) entries.nextElement();
             String zipEntryName = entry.getName();
             InputStream in = zip.getInputStream(entry);
-            String outPath = (descDir + name +"/"+ zipEntryName).replaceAll("\\*", "/");
+            String outPath = (descDir + name + "/" + zipEntryName).replaceAll("\\*", "/");
 
             // 判断路径是否存在,不存在则创建文件路径
             File file = new File(outPath.substring(0, outPath.lastIndexOf('/')));
@@ -71,7 +75,10 @@ public class UnZipFile {
         System.out.println("******************解压完毕********************");
     }
 
-    //测试
+    /**
+     * 注释
+     * @param args 参数
+     */
     public static void main(String[] args) {
         try {
             unZipFiles(new File("D:/Download/无线键盘鼠标对码/sensongnis(www.greenxf.com).zip"), "D:/Download/无线键盘鼠标对码/");
