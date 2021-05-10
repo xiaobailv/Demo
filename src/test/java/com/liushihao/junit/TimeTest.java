@@ -54,8 +54,10 @@ public class TimeTest {
         long differ2 = TimeUnit.DAYS.toDays(now.getTime() - timestamp2.getTime());
         System.out.println("differ1 = " + differ1);
         System.out.println("differ2 = " + differ2);
+
+        System.out.println("======================");
         String timeString1 = "20210222";
-        String timeString2 = "20210325";
+        String timeString2 = "20210611";
         int compareTo = timeString1.compareTo(timeString2);
         System.out.println("compareTo = " + compareTo);
         String year = timeString2.substring(0, 4);
@@ -65,7 +67,15 @@ public class TimeTest {
         sdfString = String.format(sdfString, year, month, day);
         System.out.println("sdfString = " + sdfString);
         Timestamp timestamp3 = Timestamp.valueOf(sdfString);
-        System.out.println(TimeUnit.MILLISECONDS.toDays(now.getTime() - timestamp3.getTime()));
+        Timestamp timestamp4 = Timestamp.valueOf("2021-05-11 00:00:00");
+//        System.out.println("timestamp3 = " + timestamp3);
+        long diffTime = TimeUnit.MILLISECONDS.toDays(timestamp4.getTime() - timestamp3.getTime());
+//        System.out.println(TimeUnit.MILLISECONDS.toDays(now.getTime() - timestamp3.getTime()));
+        if (diffTime <= 30 && diffTime >= -30) {
+            System.out.println("正确执行逻辑, 间隔时间为: " + diffTime);
+        } else {
+            System.out.println("抛出异常, 间隔时间为: " + diffTime);
+        }
     }
 
     @Test
