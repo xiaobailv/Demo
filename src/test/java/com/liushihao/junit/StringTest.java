@@ -28,6 +28,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 // @RunWith(SpringRunner.class)
 public class StringTest {
 
+    private static final String SMS_TEMPLATE = "您申请的信用卡已完成审批，请回复指令“CCFQJH身份证号后六位”激活。";
+
     @Autowired
     private StringEncryptor stringEncryptor;
     
@@ -41,7 +43,7 @@ public class StringTest {
         System.out.println("--str1.length=" + str1.length() + "----Byte长度=" + a.length + "-------str2=" + str2 + "------");
         String str3 = "";
         System.out.println(str3.length());
-        
+        System.out.println(SMS_TEMPLATE);
     }
 
     @Test
