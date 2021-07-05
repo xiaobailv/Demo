@@ -1,11 +1,15 @@
 package com.liushihao.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author 刘世豪
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Report {
 
     /**
