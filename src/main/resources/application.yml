@@ -15,17 +15,17 @@ spring:
 # 数据源
   datasource:
     # MySQL数据库
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
-    type: com.alibaba.druid.pool.DruidDataSource
-    username: root
-    password: ENC(ZexzBz529SG4GlfEYSrrAw==)
-    # Oracle数据库
-#    driver-class-name: oracle.jdbc.OracleDriver
-#    url: jdbc:oracle:thin:@localhost:1521:XE
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
 #    type: com.alibaba.druid.pool.DruidDataSource
-#    username: hr
-#    password: hr
+#    username: root
+#    password: ENC(ZexzBz529SG4GlfEYSrrAw==)
+    # Oracle数据库
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: hr
+    password: hr
     #schema: classpath:/org/springframework/batch/core/schema-mysql.sql  # 指定需要创建的batch任务表
   batch:
     initialize-schema: always
@@ -35,10 +35,10 @@ spring:
   profiles:
     active: txt
   # redis相关配置
-  redis:
-    host: 192.168.252.131
-    port: 7001
-    timeout: 5000
+  #redis:
+  #  host: 192.168.252.131
+  #  port: 7001
+  #  timeout: 5000
 mybatis:
   type-aliases-package: com.liushihao.entity
   mapper-locations: classpath:com/liushihao/mapper/*Mapper.xml

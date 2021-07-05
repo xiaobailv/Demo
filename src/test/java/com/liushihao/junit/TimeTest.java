@@ -1,6 +1,7 @@
 package com.liushihao.junit;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.DateUtil;
 import org.junit.Test;
 
@@ -26,10 +27,41 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class TimeTest {
 
     @Test
+    public void main() {
+        String str1 = ""; // 发卡
+        String str2 = "20210616"; // 审批
+        int intervalTime = str2.compareTo(str1);
+        System.out.println("intervalTime = " + intervalTime);
+        if (intervalTime > 0) {
+            System.out.println("审批大于发卡");
+        } else if (intervalTime == 0) {
+            System.out.println("相同");
+        } else {
+            System.out.println("发卡大于审批");
+        }
+        String sdf = "%s-%s-%s 00:00:00";
+        str1 = String.format(sdf, str1.substring(0, 4), str1.substring(4, 6), str1.substring(6, 8));
+        str2 = String.format(sdf, str2.substring(0, 4), str2.substring(4, 6), Integer.valueOf(str2.substring(6, 8)) + 2);
+        Timestamp str1Time = Timestamp.valueOf(str1);
+        Timestamp str2Time = Timestamp.valueOf(str2);
+        long l = TimeUnit.MILLISECONDS.toDays(str2Time.getTime() - str1Time.getTime());
+        System.out.println("l = " + l);
+    }
+
+    @Test
     public void simpleDateFormat() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         String format = sdf.format(new Date());
         System.out.println("format = " + format);
+
+        System.out.println("#########################");
+
+        String date1 = "20210528";
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd");
+        String today = sdf1.format(new Date());
+        if (StringUtils.isNotBlank(date1) && today.equals(date1)) {
+            System.out.println("日期相同");
+        }
     }
 
     @Test
@@ -38,8 +70,11 @@ public class TimeTest {
 //        Timestamp now = Timestamp.valueOf(LocalDateTime.now());
         // 当前系统时间
         Timestamp now = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(sdf1.format(new Date(now.getTime())));
+        System.out.println(now.getTime());
+        System.out.println(sdf.format(new Date(now.getTime())));
+        System.out.println(sdf.format(new Date()) + "###");
         Timestamp timestamp1 = Timestamp.valueOf("2021-02-19 10:18:00");
         Timestamp timestamp2 = Timestamp.valueOf("2021-02-24 17:26:00");
         System.out.println(TimeUnit.MILLISECONDS.toSeconds(timestamp2.getTime() - timestamp1.getTime()));
@@ -57,7 +92,7 @@ public class TimeTest {
 
         System.out.println("======================");
         String timeString1 = "20210222";
-        String timeString2 = "20210611";
+        String timeString2 = "20161114";
         int compareTo = timeString1.compareTo(timeString2);
         System.out.println("compareTo = " + compareTo);
         String year = timeString2.substring(0, 4);
@@ -70,12 +105,14 @@ public class TimeTest {
         Timestamp timestamp4 = Timestamp.valueOf("2021-05-11 00:00:00");
 //        System.out.println("timestamp3 = " + timestamp3);
         long diffTime = TimeUnit.MILLISECONDS.toDays(timestamp4.getTime() - timestamp3.getTime());
-//        System.out.println(TimeUnit.MILLISECONDS.toDays(now.getTime() - timestamp3.getTime()));
+        System.out.println("相差" + TimeUnit.MILLISECONDS.toDays(now.getTime() - timestamp3.getTime()) + "天");
         if (diffTime <= 30 && diffTime >= -30) {
             System.out.println("正确执行逻辑, 间隔时间为: " + diffTime);
         } else {
             System.out.println("抛出异常, 间隔时间为: " + diffTime);
         }
+        timestamp1 = null;
+        log.info("测试日志打印空对象: " + timestamp1);
     }
 
     @Test

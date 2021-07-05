@@ -9,4 +9,20 @@
             FROM dual
         </foreach>
     </insert>
+
+    <select id="selectByCondition" parameterType="com.liushihao.entity.Jd" resultType="com.liushihao.entity.Jd">
+        select
+          *
+        from JD
+        <where>
+            id <![CDATA[>=]]> #{id}
+            <if test="sex != null and sex != '' ">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+    
+    <delete id="deleteById" parameterType="com.liushihao.entity.Jd">
+        delete from JD where ID = #{id}
+    </delete>
 </mapper>

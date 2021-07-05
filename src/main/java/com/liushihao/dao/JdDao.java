@@ -8,4 +8,8 @@ import java.util.List;
 public interface JdDao extends BaseMapper<Jd> {
 
     int batchInsert(List<Jd> jds);
+
+    List<Jd> selectByCondition(Jd jd);
+
+    int deleteById(Jd jd);
 }

@@ -10,11 +10,11 @@ public class MainTest {
 
     public static void main(String[] args) {
         /*System.out.println(booleanTest());*/
-        try {
+        /*try {
             System.out.println(fileClose());
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     /*private static Boolean booleanTest() {

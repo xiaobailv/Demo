@@ -47,4 +47,23 @@ public class JdDaoTest {
         }
         System.out.println("batchInsert = " + batchInsert);
     }
+
+    @Test
+    public void selectByCondition() {
+        Jd jd = new Jd();
+        jd.setId("40");
+        jd.setSex("女");
+        List<Jd> jds = jdDao.selectByCondition(jd);
+        for (Jd jd1 : jds) {
+            System.out.println(jd1);
+        }
+    }
+
+    @Test
+    public void deleteById() {
+        Jd jd = new Jd();
+        jd.setId("44");
+        System.out.println("删除了 " + jdDao.deleteById(jd) + " 条数据");
+        System.out.println(jdDao.selectByPrimaryKey("44"));
+    }
 }
