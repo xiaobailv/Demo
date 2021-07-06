@@ -12,13 +12,13 @@ spring:
     view:
       prefix: /
       suffix: .html
-  # 数据源
   batch:
     initialize-schema: always
     job:
       # names: parentJob
       enabled: false
   profiles:
+    # 引入分离式配置文件
     active: txt, company
   # redis相关配置
   #redis:
@@ -42,7 +42,7 @@ logging:
     com.liushihao.batch.writer: debug
     #  file:
     # 输出的日志名称
-    #    name: serverlog.txt
+    #    name: serverLog.txt
     # 输出的日志目录
   #    path: ../
     #  pattern:
