@@ -15,17 +15,33 @@ import java.util.List;
  */
 public interface LogDao extends Mapper<Log> {
 
-    /*// 插入
-    public void add(Log log);
+    /**
+     * 新增
+     * @param log 根据实体信息查询
+     */
+    /*public void add(Log log);*/
 
-    // 查所有
-    public List<Log> selectAll();*/
+    /**
+     * 查所有
+     * @return Log集合
+     */
+    /*public List<Log> selectAll();*/
 
 
-    // 查询
+    /**
+     * 根据id和name查询
+     * @param id id
+     * @param name name
+     * @return Log集合
+     */
     List<Log> selectById(@Param("id") String id, @Param("name") String name);
 
-    // 查询姓名和时间
+
     /*List<Map<String, Object>> selectAllNameAndResult();*/
+
+    /**
+     * 查询姓名和时间
+     * @return LogNameAndResultDto集合
+     */
     List<LogNameAndResultDto> selectAllNameAndResult();
 }

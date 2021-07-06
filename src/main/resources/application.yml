@@ -12,28 +12,14 @@ spring:
     view:
       prefix: /
       suffix: .html
-# 数据源
-  datasource:
-    # MySQL数据库
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
-#    type: com.alibaba.druid.pool.DruidDataSource
-#    username: root
-#    password: ENC(ZexzBz529SG4GlfEYSrrAw==)
-    # Oracle数据库
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:XE
-    type: com.alibaba.druid.pool.DruidDataSource
-    username: hr
-    password: hr
-    #schema: classpath:/org/springframework/batch/core/schema-mysql.sql  # 指定需要创建的batch任务表
+  # 数据源
   batch:
     initialize-schema: always
     job:
       # names: parentJob
       enabled: false
   profiles:
-    active: txt
+    active: txt, company
   # redis相关配置
   #redis:
   #  host: 192.168.252.131

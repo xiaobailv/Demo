@@ -65,7 +65,7 @@ public class ReportDataListener extends AnalysisEventListener<Report> {
         String insertSql = String.format(INSERT_SQL, columnStringBuilder.toString(), valueStringBuilder.toString()) + "\n";
 
         // 写入txt文件
-        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(new File("D:/File/Learn/EasyExcel/INSERT_SQL.txt"), true));
+        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(new File("D:/CCB/File/20210723/INSERT_SQL.txt"), true));
         osw.write(insertSql);
         osw.close();
 
