@@ -2,7 +2,7 @@
 server:
   port: 9090
   servlet:
-    context-path: /junit
+    context-path: /demo
     jsp:
       init-parameters:
         development: true
@@ -40,6 +40,7 @@ logging:
     com.liushihao.batch.reader: debug
     com.liushihao.batch.processor: debug
     com.liushihao.batch.writer: debug
+    com.liushihao.listener: debug
     #  file:
     # 输出的日志名称
     #    name: serverLog.txt

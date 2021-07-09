@@ -24,8 +24,9 @@ public class Test03Reader implements ItemReader<List<Log>> {
         List<Log> logs;
         if (flag) {
             logs = logDao.selectAll();
-            if (logs.size() != 0)
+            if (logs.size() != 0) {
                 flag = false;
+            }
             return logs;
         }
         System.out.println("结束Test03的Reader...");

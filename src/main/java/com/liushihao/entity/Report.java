@@ -15,29 +15,31 @@ public class Report {
 
     /**
      * 库表中文名
+     *
      * ExcelProperty("库表中文名")
      * 注解此处的参数可以使用数组的形式来展示复杂标题头
      *     例如ExcelProperty({"我是大标题", "我是二级标题"})
+     * 注意: 注解里面的名称需要和excel文件里面的标题名称一致
      */
-    @ExcelProperty("库表中文名")
+    @ExcelProperty("数据库表中文名")
     private String tableChName;
 
     /**
      * 库表英文名
      */
-    @ExcelProperty({"库表英文名"})
+    @ExcelProperty({"数据库表英文名称"})
     private String tableEngName;
 
     /**
      * 字段中文名
      */
-    @ExcelProperty({"字段中文名"})
+    @ExcelProperty({"字段中文名称"})
     private String colChName;
 
     /**
      * 字段英文名
      */
-    @ExcelProperty({"字段英文名"})
+    @ExcelProperty({"字段英文名称"})
     private String colEngName;
 
     /**
