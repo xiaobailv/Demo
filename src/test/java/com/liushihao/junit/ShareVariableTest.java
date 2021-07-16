@@ -18,7 +18,7 @@ import java.util.List;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TestShareVariable {
+public class ShareVariableTest {
 
     @Autowired
     private ShareVariable shareVariable;

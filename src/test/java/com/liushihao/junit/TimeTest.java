@@ -307,5 +307,9 @@ public class TimeTest {
         DateTimeFormatter sdf = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate yyyyMM = LocalDate.parse(date + "01", sdf).with(TemporalAdjusters.firstDayOfMonth());
         System.out.println("yyyyMM = " + yyyyMM.format(sdf));
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = sdf1.format(new Date(Long.parseLong("")));
+        System.out.println("format = " + format);
     }
 }

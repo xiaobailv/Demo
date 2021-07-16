@@ -16,9 +16,7 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.Integer.parseInt;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -32,10 +30,45 @@ public class StringTest {
 
     @Autowired
     private StringEncryptor stringEncryptor;
-    
-    /**
-     * @param args
-     */
+
+    @Test
+    public void frequencySort() {
+        String s = "liushihao";
+        // 1. 使用哈希表记录每个字符出现的频率, 将字符去重后存入列表
+        HashMap<Character, Integer> map = new HashMap<>();
+        int length = s.length();
+        for (int i = 0; i < length; i++) {
+            char c = s.charAt(i);
+            Integer frequency = map.getOrDefault(c, 0) + 1;
+            map.put(c, frequency);
+        }
+        List<Character> list = new ArrayList<>(map.keySet());
+        // 2. 将列表中的字符按照频率降序排序
+//        Collections.sort(list, (a, b) -> map.get(b) - map.get(a));
+        list.sort((a, b) -> map.get(b) - map.get(a));
+        // 3.将列表中的字符根据出现的频率拼接
+        StringBuffer sb = new StringBuffer();
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            Character c = list.get(i);
+            Integer frequency = map.get(c);
+            for (int j = 0; j < frequency; j++) {
+                sb.append(c);
+            }
+        }
+        System.out.println(sb.toString());
+
+        // 按照降序排列的列表
+        for (Character character : list) {
+            System.out.println(character);
+        }
+
+        // 哈希表中所有的键值对
+        for (Character key : map.keySet()) {
+            System.out.println(key + " -> " + map.get(key));
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         String str1 = "一百二十个字符怎么就那么难弄呢我该说些啥呢算了还是先扯扯把哎还不到120个字啊让我怎么测试asdfghjklqwe哈rtuo";
         byte[] a = str1.getBytes();

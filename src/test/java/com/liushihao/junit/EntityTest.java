@@ -1,12 +1,26 @@
 package com.liushihao.junit;
 
 import com.liushihao.entity.Dish;
+import com.liushihao.entity.Log;
 import com.liushihao.entity.User;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
 public class EntityTest {
+
+    @Test
+    public void forAddList() {
+        ArrayList<Log> logs = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            Log log = new Log();
+            log.setId("" + i);
+            logs.add(log);
+        }
+        for (Log log1 : logs) {
+            System.out.println("log1 = " + log1);
+        }
+    }
 
     @Test
     public void getProperty() {
@@ -44,7 +58,7 @@ public class EntityTest {
         System.out.println("后 = " + user1);
     }
 
-    private User changeUser(){
+    private User changeUser() {
         User user = new User();
         user.setAge(18);
         return user;
