@@ -76,6 +76,9 @@ public class ListTest {
     @Test
     public void loop() {
         ArrayList<String> list = new ArrayList<>();
+        for (String s : list) {
+            System.out.println("s = " + s);
+        }
         StringBuilder stringBuilder = new StringBuilder();
         list.add("1");
         list.add("2");
