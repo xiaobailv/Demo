@@ -137,6 +137,7 @@ public class StringTest {
     @Test
     public void stringSubstring() {
         String str = "09F3712345678901";
+        System.out.println(str.substring(0, 3));
         int length = str.length();
         System.out.println("length = " + length);
         System.out.println(str.substring(length - 4, length));

@@ -1,5 +1,6 @@
 package com.liushihao.junit;
 
+import cn.hutool.core.collection.CollectionUtil;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -76,8 +77,16 @@ public class ListTest {
     @Test
     public void loop() {
         ArrayList<String> list = new ArrayList<>();
-        for (String s : list) {
-            System.out.println("s = " + s);
+        if (CollectionUtil.isEmpty(list)) {
+            System.out.println("空");
+            for (String s : list) {
+                System.out.println("s = " + s);
+            }
+        } else {
+            System.out.println("非空");
+            for (String s : list) {
+                System.out.println("s = " + s);
+            }
         }
         StringBuilder stringBuilder = new StringBuilder();
         list.add("1");

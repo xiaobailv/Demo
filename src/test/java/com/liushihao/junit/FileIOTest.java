@@ -18,6 +18,12 @@ import java.util.*;
 public class FileIOTest {
 
     @Test
+    public void dir() {
+        File file = new File(String.format("D:\\%s\\%s\\", "CCB", "File"));
+        File[] files = file.listFiles();
+    }
+
+    @Test
     public void filePath() throws IOException {
         String fileName = "src/test/resource/新建文本文档.txt";
         FileInputStream fileInputStream = new FileInputStream(fileName);

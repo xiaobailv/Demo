@@ -9,6 +9,14 @@ import java.math.BigDecimal;
 public class NumberTest {
 
     @Test
+    public void intTest() {
+        Integer count = 0;
+        count += 5;
+        count += 5;
+        System.out.println("count = " + count);
+    }
+
+    @Test
     public void integerToShort() {
         Integer integer = 100123;
         System.out.println(integer.shortValue());
