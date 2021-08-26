@@ -10,6 +10,15 @@ import java.util.List;
 public class ListTest {
 
     @Test
+    public void numberList() {
+        String str = "class com.liushihao.entity.CIS40390ReportDo";
+        String[] split = str.split("\\.");
+        for (String s : split) {
+            System.out.println("s = " + s);
+        }
+    }
+
+    @Test
     public void loopArray() {
         List<String> list = new ArrayList<>(2);
         list.add("刘");
