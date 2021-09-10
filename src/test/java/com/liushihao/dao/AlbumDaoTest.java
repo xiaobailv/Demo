@@ -29,7 +29,7 @@ public class AlbumDaoTest {
 
     @Test
     public void selectBycount() {
-        List<Album> albums = albumDao.selectBycount(0);
+        List<Album> albums = albumDao.selectBycount(1);
         for (Album album : albums) {
             System.out.println("album = " + album);
         }
