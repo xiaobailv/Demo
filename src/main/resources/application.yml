@@ -34,13 +34,13 @@ logging:
   level:
     root: error
     com.liushihao.dao: debug
-    com.liushihao.service: debug
-    com.liushihao.controller: debug
-    com.liushihao.batch.config: debug
-    com.liushihao.batch.reader: debug
-    com.liushihao.batch.processor: debug
-    com.liushihao.batch.writer: debug
-    com.liushihao.listener: debug
+    com.liushihao.service: info
+    com.liushihao.controller: info
+    com.liushihao.batch.config: info
+    com.liushihao.batch.reader: info
+    com.liushihao.batch.processor: info
+    com.liushihao.batch.writer: info
+    com.liushihao.listener: info
     #  file:
     # 输出的日志名称
     #    name: serverLog.txt
@@ -53,4 +53,4 @@ logging:
 # 设置加密密钥 运行项目的时候 在后面拼接 --jasypt.encryptor.password=123456
 jasypt:
   encryptor:
-    password: hn
+    password: chili
