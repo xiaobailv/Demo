@@ -27,4 +27,21 @@ public class HashMapTest {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
         }
     }
+
+    @Test
+    public void nullTest() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(null, null);
+        hashMap.put("1", "刘世豪");
+        for (String s : hashMap.keySet()) {
+            String s1 = hashMap.get(s);
+            System.out.println("s = " + s);
+            System.out.println("s1 = " + s1);
+        }
+    }
+
+    @Test
+    public void newHashMap() {
+        HashMap<String, String> hashMap = new HashMap<>(8);
+    }
 }

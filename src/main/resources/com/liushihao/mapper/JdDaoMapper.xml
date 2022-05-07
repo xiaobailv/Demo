@@ -19,6 +19,9 @@
             <if test="sex != null and sex != '' ">
                 and sex = #{sex}
             </if>
+            <if test="mobile != null and mobile == '15555555555'.toString() ">
+                and MOBILE = #{mobile}
+            </if>
         </where>
     </select>
     

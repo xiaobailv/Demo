@@ -100,4 +100,10 @@ public class NumberTest {
             System.out.println("上传文件成功");
         }
     }
+
+    @Test
+    public void weiyu() {
+        int i = 1 << 30;
+        System.out.println("i = " + i);
+    }
 }

@@ -17,25 +17,40 @@ import java.util.Date;
 @Slf4j
 @Aspect
 @Component
-public class AroundAspect { // 什么时间 执行了什么操作 操作的结果
+/**
+  什么时间 执行了什么操作 操作的结果
+ */
+public class AroundAspect {
 
-    // 注入logService
+    /**
+     * 注入logService
+     */
     @Resource
     private LogService logService;
 
-    // 组装切面
+    /**
+     * 组装切面
+     * @param proceedingJoinPoint
+     * @return
+     * @throws Throwable
+     */
     @Around(value = "pc1()")
     public Object aroundAspect(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        System.out.println("进入前置通知");
+        System.out.println("进入环绕通知");
         // 获取执行时间
         Date date = new Date();
         String result = null;
-        MethodSignature methodSignature = (MethodSignature)proceedingJoinPoint.getSignature();  // 获取方法名
-        LogAspect annotation = methodSignature.getMethod().getAnnotation(LogAspect.class);   // 获取注解对象
-        String operationName = annotation.operationName();  // 获取注解操作类型
-        String fileName = annotation.fileName();    // 获取日志文件
+        // 获取方法名
+        MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
+        // 获取注解对象
+        LogAspect annotation = methodSignature.getMethod().getAnnotation(LogAspect.class);
+        // 获取注解操作类型
+        String operationName = annotation.operationName();
+        // 获取日志文件
+        String fileName = annotation.fileName();
         try {
-            Object proceed = proceedingJoinPoint.proceed(); // 执行目标方法
+            // 执行目标方法
+            Object proceed = proceedingJoinPoint.proceed();
             result = "成功";
             return proceed;
         } catch (Throwable throwable) {
@@ -46,10 +61,14 @@ public class AroundAspect { // 什么时间 执行了什么操作 操作的结�
             Log log = new Log(null, "test", date, operationName, result);
             String context = "id: " + log.getId() + "|name: " + log.getName() + "|date: " + log.getDate() + "|method: " + log.getMethod() + "|result: " + log.getResult() + "\n";
             WriteLogUtil.write(fileName, context);
+            System.out.println("结束环绕通知");
         }
     }
 
-    // 设置切点
+    /**
+     * 设置切点
+     */
     @Pointcut(value = "@annotation(com.liushihao.aspect.LogAspect)")
-    public void pc1() {}
+    public void pc1() {
+    }
 }
