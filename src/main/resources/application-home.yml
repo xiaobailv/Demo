@@ -6,4 +6,4 @@ spring:
     url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: ENC(ZexzBz529SG4GlfEYSrrAw==)
+    password: ENC(uHT7UzBJ6jLgXiEKaDVsjg==)

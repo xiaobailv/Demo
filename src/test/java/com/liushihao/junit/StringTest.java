@@ -258,6 +258,24 @@ public class StringTest {
     }
 
     @Test
+    public void replaceString1() {
+//        System.out.println(String.format("第一个%s, 第二个%s", 1));
+//        System.out.println(String.format("第一个%s, 第二个%s", 1, 2));
+        StringBuffer stringBuffer = new StringBuffer("第一个");
+        stringBuffer.append(" - 第二个 ");
+        char charAt = stringBuffer.charAt(stringBuffer.length() - 1);
+        System.out.println("charAt = " + charAt);
+        if (' ' == charAt) {
+            System.out.println("OK");
+        } else {
+            System.out.println("NOT OK");
+        }
+        System.out.println("stringBuffer = " + stringBuffer);
+        int i = BigDecimal.TEN.compareTo(null);
+        System.out.println("i = " + i);
+    }
+
+    @Test
     public void stringEquals() {
         User user = new User("2", null, null, null, null, null, null);
 
@@ -411,5 +429,24 @@ public class StringTest {
         }
         System.out.println(StringUtils.isBlank(str2));
         System.out.println(StringUtils.isNotBlank(str2));
+    }
+
+    @Test
+    public void add() {
+        String str = "";
+        str = str + " 车架号";
+        str = str + " 首付金额";
+        System.out.println("str = " + str);
+        StringBuffer stringBuffer = new StringBuffer("不一致, 包括 ");
+        if (' ' == stringBuffer.charAt(stringBuffer.length() - 1)) {
+            stringBuffer.append("车架号");
+        } else {
+            stringBuffer.append("、车架号");
+        }
+        System.out.println("stringBuffer = " + stringBuffer);
+//        StringBuffer delete = stringBuffer.delete(0, stringBuffer.length());
+//        System.out.println("delete = " + delete);
+        stringBuffer.setLength(0);
+        System.out.println("stringBuffer = " + stringBuffer);
     }
 }

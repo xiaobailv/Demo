@@ -12,6 +12,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -27,9 +28,22 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class TimeTest {
 
     @Test
-    public void main() {
+    public void name() throws ParseException {
+        String date = "20220328";
+        int days = 10;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        Date parseDate = sdf.parse(date);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(parseDate);
+        calendar.add(Calendar.DAY_OF_MONTH, days);
+        String format = sdf.format(calendar.getTime());
+        System.out.println("format = " + format);
+    }
+
+    @Test
+    public void main() throws ParseException {
         String str1 = ""; // 发卡
-        String str2 = "20210616"; // 审批
+        String str2 = "20210616111111"; // 审批
         int intervalTime = str2.compareTo(str1);
         System.out.println("intervalTime = " + intervalTime);
         if (intervalTime > 0) {
@@ -40,12 +54,24 @@ public class TimeTest {
             System.out.println("发卡大于审批");
         }
         String sdf = "%s-%s-%s 00:00:00";
-        str1 = String.format(sdf, str1.substring(0, 4), str1.substring(4, 6), str1.substring(6, 8));
-        str2 = String.format(sdf, str2.substring(0, 4), str2.substring(4, 6), Integer.valueOf(str2.substring(6, 8)) + 2);
-        Timestamp str1Time = Timestamp.valueOf(str1);
+//        str1 = String.format(sdf, str1.substring(0, 4), str1.substring(4, 6), str1.substring(6, 8));
+//        str2 = String.format(sdf, str2.substring(0, 4), str2.substring(4, 6), Integer.valueOf(str2.substring(6, 8)) + 2);
+        str2 = String.format(sdf, str2.substring(0, 4), str2.substring(4, 6), str2.substring(6, 8), str2.substring(8, 10), str2.substring(10, 12), str2.substring(12, 14));
+//        Timestamp str1Time = Timestamp.valueOf(str1);
         Timestamp str2Time = Timestamp.valueOf(str2);
-        long l = TimeUnit.MILLISECONDS.toDays(str2Time.getTime() - str1Time.getTime());
-        System.out.println("l = " + l);
+        Date date = new Date();
+        date = str2Time;
+        System.out.println("date = " + date);
+//        long l = TimeUnit.MILLISECONDS.toDays(str2Time.getTime() - str1Time.getTime());
+//        System.out.println("str1Time = " + str1Time);
+        System.out.println("str2Time = " + str2Time);
+//        System.out.println("l = " + l);
+
+        String createDate = "20211110191515";
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Timestamp timestamp = Timestamp.valueOf(sdf2.format(sdf1.parse(createDate)));
+        System.out.println("timestamp = " + timestamp);
     }
 
     @Test

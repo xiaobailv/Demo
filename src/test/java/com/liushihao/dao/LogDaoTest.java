@@ -4,18 +4,20 @@ import com.liushihao.entity.Log;
 import com.liushihao.entity.LogNameAndResultDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class LogDaoTest {
 
-    @Resource
+    @Autowired
     private LogDao logDao;
 
     @Test
@@ -25,6 +27,7 @@ public class LogDaoTest {
 
     @Value("${testSpace}")
     private String[] testSpace;
+
     @Test
     public void selectAll() {
         List<Log> logs = logDao.selectAll();
@@ -35,6 +38,18 @@ public class LogDaoTest {
             String s = testSpace[i];
             System.out.println("s = " + s);
         }
+    }
+
+    @Test
+    @Rollback
+    public void insert() {
+        Log log = new Log();
+        log.setId(String.valueOf(System.currentTimeMillis()));
+        log.setDate(new Date());
+        log.setMethod("Method");
+        log.setResult("Result");
+        int insert = logDao.insert(log);
+        System.out.println("insert = " + insert);
     }
 
     @Test

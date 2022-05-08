@@ -6,6 +6,8 @@ import com.liushihao.entity.User;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class EntityTest {
 
@@ -62,5 +64,21 @@ public class EntityTest {
         User user = new User();
         user.setAge(18);
         return user;
+    }
+
+    private Object getObject (Object object) {
+        if (object.getClass().getName().equals("java.util.List")) {
+            return object;
+        } else {
+            return new HashMap<>();
+        }
+    }
+
+    @Test
+    public void getObj() {
+        List<Object> objects = new ArrayList<>();
+        Object object = getObject(objects);
+        System.out.println("object.getClass() = " + object.getClass());
+        System.out.println(object instanceof ArrayList);
     }
 }

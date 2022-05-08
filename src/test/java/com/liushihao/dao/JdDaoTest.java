@@ -51,8 +51,9 @@ public class JdDaoTest {
     @Test
     public void selectByCondition() {
         Jd jd = new Jd();
-        jd.setId("40");
+        jd.setId("30");
         jd.setSex("女");
+        jd.setMobile("15555555555");
         List<Jd> jds = jdDao.selectByCondition(jd);
         for (Jd jd1 : jds) {
             System.out.println(jd1);

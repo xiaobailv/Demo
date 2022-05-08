@@ -67,6 +67,27 @@ public class CompareToTest {
     public void bigDecimalString() {
         String str = "00000000000";
         BigDecimal bigDecimal = new BigDecimal(00000000000);
+        System.out.println("bigDecimal = " + bigDecimal);
+        String str1 = "10.22";
+        String str2 = "10.25";
+        String str3 = "10.28";
+        String str4 = "10";
+        BigDecimal bigDecimal1 = BigDecimal.valueOf(Double.parseDouble(str1));
+        BigDecimal bigDecimal2 = BigDecimal.valueOf(Double.parseDouble(str2));
+        BigDecimal bigDecimal3 = BigDecimal.valueOf(Double.parseDouble(str3));
+        BigDecimal bigDecimal4 = BigDecimal.valueOf(Double.parseDouble(str4));
+        System.out.println("bigDecimal1 = " + bigDecimal1);
+        System.out.println("bigDecimal2 = " + bigDecimal2);
+        System.out.println("bigDecimal3 = " + bigDecimal3);
+        System.out.println("bigDecimal4 = " + bigDecimal4);
+        System.out.println("###########################");
+        int compareTo = bigDecimal4.compareTo(BigDecimal.TEN);
+        System.out.println("compareTo = " + compareTo);
+        System.out.println("###########################");
+        Integer integer1 = 10;
+        Integer integer2 = 10;
+        System.out.println(integer1 == integer2);
+        System.out.println(integer1.equals(integer2));
         System.out.println(new BigDecimal("1").multiply(bigDecimal.divide(new BigDecimal("100"))));
     }
 

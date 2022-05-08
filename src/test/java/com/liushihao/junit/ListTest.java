@@ -24,6 +24,12 @@ public class ListTest {
         list.add("刘");
         list.add("世");
         list.add("豪");
+        String s1 = list.get(0);
+        String s2 = list.get(1);
+        String s3 = list.get(2);
+        System.out.println("s1 = " + s1);
+        System.out.println("s2 = " + s2);
+        System.out.println("s3 = " + s3);
         String[] array = new String[list.size()];
         array = list.toArray(array);
         for (String s : array) {
@@ -104,9 +110,7 @@ public class ListTest {
         list.add("4");
         list.add("5");
         System.out.println("第一个" + list.get(0));
-        list.forEach(i -> {
-            System.out.println("i = " + i);
-        });
+        list.forEach(i -> System.out.println("i = " + i));
         /*for (int i = 1; i < list.size(); i++) {
             System.out.println(list.get(i));
         }*/

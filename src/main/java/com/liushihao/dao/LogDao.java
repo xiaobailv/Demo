@@ -19,13 +19,13 @@ public interface LogDao extends Mapper<Log> {
      * 新增
      * @param log 根据实体信息查询
      */
-    /*public void add(Log log);*/
+    /*void add(Log log);*/
 
     /**
      * 查所有
      * @return Log集合
      */
-    /*public List<Log> selectAll();*/
+    /*List<Log> selectAll();*/
 
 
     /**
