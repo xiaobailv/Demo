@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StreamTest {
@@ -65,6 +66,13 @@ public class StreamTest {
                 add(new Student(20163001, "丁奉", 24, 5, "土木工程", "南京大学"));
             }
         };
+        Optional<Student> first = students.stream().filter(student -> "平顶山学院".equals(student.getSchool())).findFirst();
+        if (first.isPresent()) {
+            Student student = first.get();
+            System.out.println("student = " + student);
+        }
+        first.ifPresent(student -> System.out.println("student = " + student));
+
         // 从集合中筛选出武汉大学的学生
         List<Student> collect = students.stream().filter(student -> "武汉大学".equals(student.getSchool())).collect(Collectors.toList());
         collect.forEach(System.out::println);

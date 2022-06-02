@@ -1,4 +1,0 @@
-# Demo
-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
-# windows_home_idea
-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
