@@ -4,9 +4,8 @@
 
     <!--  -->
     <select id="selectAllNameAndResult" resultType="com.liushihao.entity.LogNameAndResultDto">
-        select
-          name,
-          result
-          from log
+        select name,
+               result
+        from log
     </select>
 </mapper>
