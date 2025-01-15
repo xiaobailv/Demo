@@ -335,7 +335,7 @@ public class FileIOTest {
 
     @Test
     public void createDirectory() {
-        String filePath = "D:/Download/aaa/123.txt";
+        String filePath = "D:/Download/aaa/123.json";
         WriteUtil.write(filePath, "111111111\n", false);
     }
 
