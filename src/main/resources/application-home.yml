@@ -7,3 +7,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
     password: ENC(uHT7UzBJ6jLgXiEKaDVsjg==)
+# 设置加密密钥 运行项目的时候 在后面拼接 --jasypt.encryptor.password=123456
+jasypt:
+  encryptor:
+    password: chili
