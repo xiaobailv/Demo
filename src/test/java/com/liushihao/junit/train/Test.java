@@ -21,5 +21,8 @@ public class Test {
 
         String a = "";
         System.out.println(a.equals("111"));
+
+        System.out.println(1 << 42);
+        System.out.println(1L << 42);
     }
 }

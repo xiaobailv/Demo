@@ -57,7 +57,7 @@ public class ZhihuSelenium {
             loginBtn.click();
 
             Actions actions = new Actions(driver);
-            WebElement moveBtn = driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div/div[2]/div/div[2]/div[2]/span"));
+            WebElement moveBtn = driver.findElement(By.xpath("/src/main/webapp/html/body/div[4]/div[2]/div/div/div[2]/div/div[2]/div[2]/span"));
             // 移动滑块元素并悬停, 不能超过框的长度, 负责异常
             actions.clickAndHold(moveBtn);
             actions.moveByOffset(258, 0).perform();
