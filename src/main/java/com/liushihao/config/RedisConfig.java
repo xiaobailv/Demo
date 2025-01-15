@@ -1,4 +1,4 @@
-package com.liushihao.redis.config;
+package com.liushihao.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -48,7 +48,7 @@ public class RedisConfig {
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
-        RedisTemplate<String, Object> template = new RedisTemplate();
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
 
         // json序列化配置
