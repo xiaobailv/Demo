@@ -1,4 +1,4 @@
-package com.liushihao.rabbitmq.workqueues;
+package com.liushihao.rabbitmq.topics;
 
 import com.liushihao.util.RabbitMQConnectionUtil;
 import com.rabbitmq.client.Channel;
@@ -15,12 +15,12 @@ import java.util.concurrent.TimeoutException;
  */
 public class Consumer02 {
 
-    private static final String QUEUE_NAME = "work";
+    private static final String QUEUE_NAME = "TOPIC_QUEUE2";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         Connection connection = RabbitMQConnectionUtil.getConnection();
         Channel channel = connection.createChannel();
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
         // 设置消息的流控 -> 每次拿到消息的个数
         channel.basicQos(1);
         // 监听消息

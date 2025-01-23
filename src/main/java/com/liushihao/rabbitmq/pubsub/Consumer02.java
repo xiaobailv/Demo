@@ -1,4 +1,4 @@
-package com.liushihao.rabbitmq.workqueues;
+package com.liushihao.rabbitmq.pubsub;
 
 import com.liushihao.util.RabbitMQConnectionUtil;
 import com.rabbitmq.client.Channel;
@@ -15,28 +15,18 @@ import java.util.concurrent.TimeoutException;
  */
 public class Consumer02 {
 
-    private static final String QUEUE_NAME = "work";
+    private static final String QUEUE_NAME2 = "PUB_SUB_QUEUE2";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         Connection connection = RabbitMQConnectionUtil.getConnection();
         Channel channel = connection.createChannel();
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        // 设置消息的流控 -> 每次拿到消息的个数
+        channel.queueDeclare(QUEUE_NAME2, true, false, false, null);
         channel.basicQos(1);
-        // 监听消息
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
             System.out.println("消费者2号获取到消息：" + message);
-            // 拿到消息后告诉生产者
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         };
-        // 设置手动ack
-        channel.basicConsume(QUEUE_NAME, false, deliverCallback, consumerTag -> {});
-        System.out.println("开始监听队列");
+        channel.basicConsume(QUEUE_NAME2, false, deliverCallback, consumerTag -> {});
     }
 }

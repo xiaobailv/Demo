@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  rabbitmq1:
+    image: rabbitmq:3.8.5-management-alpine
+    container_name: rabbitmq1
+    hostname: rabbitmq1
+    extra_hosts:
+      - "rabbitmq1:192.168.18.111"
+      - "rabbitmq2:192.168.18.115"
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=RABBITMQ_ERLANG_COOKIE
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 4369:4369
+      - 25672:25672

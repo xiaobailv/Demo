@@ -31,7 +31,7 @@ public class Consumer01 {
                 e.printStackTrace();
             }
             String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println("生产者1号获取到消息：" + message);
+            System.out.println("消费者1号获取到消息：" + message);
             // 拿到消息后告诉生产者
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
         };

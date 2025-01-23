@@ -23,7 +23,11 @@ spring:
       enabled: false
   profiles:
     # 引入分离式配置文件
-    active: txt, docker
+    active:
+      - txt
+      - home
+#      - docker
+      - rabbitMQ
 mybatis:
   type-aliases-package: com.liushihao.entity
   mapper-locations: classpath:com/liushihao/mapper/*Mapper.xml

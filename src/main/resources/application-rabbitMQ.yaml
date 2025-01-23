@@ -1,0 +1,14 @@
+spring:
+  rabbitmq:
+    host: 192.168.18.111
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        prefetch: 10 # 消息流控，每次消费消息的数量
+        acknowledge-mode: manual # 手动开启Ack
+#        concurrency: 3 # 监听线程并发数量
+    publisher-confirm-type: correlated # 开启confirm机制
+    publisher-returns: true # 开启Return机制
