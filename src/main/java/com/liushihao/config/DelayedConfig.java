@@ -16,7 +16,7 @@ public class DelayedConfig {
 
     public static final String DELAY_EXCHANGE = "delay_exchange";
     public static final String DELAY_QUEUE = "delay_queue";
-    public static final String DELAY_ROUTINGKEY = "delay.#";
+    public static final String DELAY_ROUTING_KEY = "delay.#";
 
     @Bean
     public Exchange delayExchange() {
@@ -33,6 +33,6 @@ public class DelayedConfig {
 
     @Bean
     public Binding delayBinding(Queue delayQueue, Exchange delayExchange) {
-        return BindingBuilder.bind(delayQueue).to(delayExchange).with(DELAY_ROUTINGKEY).noargs();
+        return BindingBuilder.bind(delayQueue).to(delayExchange).with(DELAY_ROUTING_KEY).noargs();
     }
 }
